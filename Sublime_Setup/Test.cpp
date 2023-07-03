@@ -14,5 +14,8 @@ int main() {
         for(int i = 0; i < n; i++) {
             cin >> ele[i];
         }
+        for(int i = 0; i < n; i++) {
+            cout << ele[i] << " ";
+        }
     }
 }
