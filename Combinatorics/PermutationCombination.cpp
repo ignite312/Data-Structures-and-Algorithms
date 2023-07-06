@@ -19,6 +19,25 @@ vector<string> combination(int n, int k) {
     }
     return ans;
 }
+
+void combination2(vector<vector<int> >& ans,
+    vector<int>& tmp, int n, int left, int k) {
+    if (k == 0) {
+        ans.push_back(tmp);
+        return;
+    }
+    for (int i = left; i <= n; ++i) {
+        tmp.push_back(i);
+        combination2(ans, tmp, n, i + 1, k - 1);
+        tmp.pop_back();
+    }
+}
+vector<vector<int> > makeCombi(int n, int k) {
+    vector<vector<int> > ans;
+    vector<int> tmp;
+    combination2(ans, tmp, n, 1, k);
+    return ans;
+}
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(0);
@@ -28,7 +47,7 @@ int main() {
         vector<string> combinations = combination(8, 4);
         for(auto ele : combinations){cout << ele << "\n";}
             cout << "\n";
-        
+
         string s = "12345";
         vector<string> permutations = permutation(s);
         for(auto ele : permutations){cout << ele << "\n";}
