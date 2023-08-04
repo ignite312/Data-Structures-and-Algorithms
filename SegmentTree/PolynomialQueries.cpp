@@ -14,7 +14,7 @@ void build(vector<ll> &arr, int node, int l, int r) {
     build(arr, node*2+1, mid+1, r);
     tree[node] = tree[node*2] + tree[node*2+1];
 }
-void update(int node, int l, int r, int i, int j) {
+void push(int node, int l, int r) {
     if(lazy[node][0] != 0) {
         ll seg = r - l + 1;
         tree[node] += seg*lazy[node][0] + (seg*(seg-1)*1LL*lazy[node][1])/2;
@@ -27,6 +27,9 @@ void update(int node, int l, int r, int i, int j) {
         lazy[node][0] = 0;
         lazy[node][1] = 0;
     }
+}
+void update(int node, int l, int r, int i, int j) {
+    push(node, l, r);
     if(l > j || r < i)return;
     if(l >= i && r <= j) {
         ll seg = r - l + 1;
@@ -46,18 +49,7 @@ void update(int node, int l, int r, int i, int j) {
     tree[node] = tree[node*2] + tree[node*2+1];
 }
 ll sum(int node, int l, int r, int i, int j) {
-    if(lazy[node][0] != 0) {
-        ll seg = r - l + 1;
-        tree[node] += seg*lazy[node][0] + (seg*(seg-1)*lazy[node][1])/2;
-        if(l != r) {
-            int mid = l + (r - l)/2;
-            lazy[node*2][0] += lazy[node][0];
-            lazy[node*2+1][0] += lazy[node][0]+(mid-l+1)*lazy[node][1];
-            lazy[node*2][1]+=lazy[node][1], lazy[node*2+1][1]+=lazy[node][1];
-        }
-        lazy[node][0] = 0;
-        lazy[node][1] = 0;
-    }
+    push(node, l, r);
     if(l > j || r < i)return 0;
     if(l >= i && r <= j) return tree[node];
     int mid = l + (r - l)/2;
