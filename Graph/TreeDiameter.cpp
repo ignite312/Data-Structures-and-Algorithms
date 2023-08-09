@@ -45,3 +45,4 @@ int main() {
     cout << dept_now << "\n";
   }
 }
+// https://cses.fi/problemset/task/1131
