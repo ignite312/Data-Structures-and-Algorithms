@@ -78,3 +78,4 @@ int main() {
         solve(queries);
     }
 }
+// https://cses.fi/problemset/task/1734
