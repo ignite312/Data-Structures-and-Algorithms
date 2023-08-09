@@ -56,3 +56,4 @@ int main() {
     BellmanFord();
   }
 }
+// https://codeforces.com/contest/20/submission/218048541
