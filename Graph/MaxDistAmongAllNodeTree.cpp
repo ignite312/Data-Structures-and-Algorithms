@@ -44,3 +44,5 @@ int main() {
     for(int i = 1; i <= n; i++)cout << max(height[i], dist[i]) << " ";
   }
 }
+// https://cses.fi/problemset/task/1132
+// https://codeforces.com/contest/1822/problem/F
