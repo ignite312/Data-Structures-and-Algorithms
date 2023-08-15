@@ -4,10 +4,12 @@ using namespace std;
 struct TrieNode {
     TrieNode* child[26];
     int wordCount, prefixCount;
+    bool isLeafNode;
 
     TrieNode() {
         wordCount = 0;
         prefixCount = 0;
+        isLeafNode = false;
         for (int i = 0; i < 26; i++)child[i] = NULL;
     }
 };
@@ -21,6 +23,7 @@ void insert_key(TrieNode *root, string &key) {
         current = current->child[key[i] - 'a'];
         current->prefixCount++;
     }
+    current->isLeafNode = true;
     current->wordCount++;
 }
 bool search_key(TrieNode *root, string &key) {
@@ -69,6 +72,13 @@ bool delete_key(TrieNode* root, string& word) {
         return true;
     }
 }
+bool isLeafNode(struct TrieNode* root) {
+    return root->isLeafNode != false;
+}
+void display(struct TrieNode* root, string str) {
+    if (isLeafNode(root))cout << str << "\n";
+    for (int i = 0; i < 26; i++)if (root->child[i])display(root->child[i], str + (char)(i + 'a'));
+}
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(0);
@@ -83,7 +93,8 @@ int main() {
             cin >> s;
             insert_key(root, s);
         }
-        string s = "aaaaaaaa";
+        display(root, "");
+        string s = "apple";
         if(search_key(root, s))cout << "Found!";
         delete_key(root, s);
         if(search_key(root, s))cout << "Found!";
