@@ -9,6 +9,7 @@ int bigMod(int base, ll power, const int M) {
     if(power % 2 == 0)return p*1LL*p % M;
     return (p*1LL*p % M) * (base % M) % M;
 }
+// 127657753 137
 const int M1 = 1000000009, M2 = 987654319;
 const int p1 = 31, p2 = 277;
 int ip1, ip2;
