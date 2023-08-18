@@ -49,7 +49,19 @@ pair<string, int> find(TrieNode* root, string &prefix, int indx) {
     if(indx == prefix.length()) return query(root, prefix, root->mxOccurring);
     if(root->child[prefix[indx] - 'a'] == NULL)return {"", -1};
     return find(root->child[prefix[indx] - 'a'], prefix, indx+1);
-}/*
+}
+/*
+void isWordPrefixOfOtherWord(struct TrieNode* root) {
+    for (int i = 0; i < 10; i++)if(root->child[i]) {
+        if(root->child[i]->wordCount && root->child[i]->prefixCount > 1) {
+            ok = false;
+            return;
+        }
+        query(root->child[i]);
+    }
+}
+*/
+/*
 bool search(TrieNode *root, string &key) {
     TrieNode* current = root;
     for (auto c : key) {
@@ -95,6 +107,10 @@ bool delete_key(TrieNode* root, string& word) {
         root->child[word[0] - 'a'] = NULL;
         return true;
     }
+}
+void del(struct TrieNode* root) {
+    for (int i = 0; i < 10; i++)if(root->child[i])del(root->child[i]);
+    delete(root);
 }
 bool isLeafNode(struct TrieNode* root) {
     return root->isLeafNode != false;
