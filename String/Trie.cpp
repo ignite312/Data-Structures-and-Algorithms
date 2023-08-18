@@ -57,7 +57,7 @@ void isWordPrefixOfOtherWord(struct TrieNode* root) {
             ok = false;
             return;
         }
-        query(root->child[i]);
+        isWordPrefixOfOtherWord(root->child[i]);
     }
 }
 */
