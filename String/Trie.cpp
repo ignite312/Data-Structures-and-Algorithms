@@ -49,7 +49,7 @@ pair<string, int> find(TrieNode* root, string &prefix, int indx) {
     if(indx == prefix.length()) return query(root, prefix, root->mxOccurring);
     if(root->child[prefix[indx] - 'a'] == NULL)return {"", -1};
     return find(root->child[prefix[indx] - 'a'], prefix, indx+1);
-}
+}/*
 bool search(TrieNode *root, string &key) {
     TrieNode* current = root;
     for (auto c : key) {
@@ -102,7 +102,7 @@ bool isLeafNode(struct TrieNode* root) {
 void display(struct TrieNode* root, string word) {
     if (isLeafNode(root))cout << word << "\n";
     for (int i = 0; i < 26; i++)if(root->child[i])display(root->child[i], word + (char)(i + 'a'));
-}
+}*/
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(0);
