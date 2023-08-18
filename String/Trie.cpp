@@ -45,10 +45,10 @@ pair<string, int> query(TrieNode* root, string &word, int mxOccurring) {
         }
     }
 }
-pair<string, int> find(TrieNode* root, string &prefix, int indx) {
+pair<string, int> maximumOccurringwWordHavingPrefix(TrieNode* root, string &prefix, int indx) {
     if(indx == prefix.length()) return query(root, prefix, root->mxOccurring);
     if(root->child[prefix[indx] - 'a'] == NULL)return {"", -1};
-    return find(root->child[prefix[indx] - 'a'], prefix, indx+1);
+    return maximumOccurringwWordHavingPrefix(root->child[prefix[indx] - 'a'], prefix, indx+1);
 }
 /*
 void isWordPrefixOfOtherWord(struct TrieNode* root) {
@@ -139,7 +139,7 @@ int main() {
         while(q--) {
             string prefix;
             cin >> prefix;
-            auto ans = find(root, prefix, 0);
+            auto ans = maximumOccurringwWordHavingPrefix(root, prefix, 0);
             cout << ans.first << " " << ans.second << "\n";
         }
     }
