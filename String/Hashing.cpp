@@ -10,6 +10,7 @@ int bigMod(int base, ll power, const int M) {
     return (p*1LL*p % M) * (base % M) % M;
 }
 // 127657753 137
+// 53 For Upper n Lower Case
 const int M1 = 1000000009, M2 = 987654319;
 const int p1 = 31, p2 = 277;
 int ip1, ip2;
