@@ -37,26 +37,26 @@ void init() {
 }
 struct Hashing {
     int n;
-    pair<int, int> hashs[N+1];
+    pair<int, int> hashes[N+1];
     void BuildHash(string &s) {
         n = (int)s.length();
-        hashs[0] = {0, 0};
+        hashes[0] = {0, 0};
         for(int i = 0; i < n; i++) {
             pair<int, int> t_hash;
-            t_hash.first = (hashs[i].first + 1LL*p_ip1[i].first * s[i] % M1) % M1;
-            t_hash.second = (hashs[i].second + 1LL*p_ip2[i].first * s[i] % M2) % M2;
-            hashs[i+1] = {t_hash.first, t_hash.second};
+            t_hash.first = (hashes[i].first + 1LL*p_ip1[i].first * s[i] % M1) % M1;
+            t_hash.second = (hashes[i].second + 1LL*p_ip2[i].first * s[i] % M2) % M2;
+            hashes[i+1] = {t_hash.first, t_hash.second};
         }
     }
     pair<int, int> get_hash(int l, int r) {
         pair<int, int> ans;
-        ans.first = 1LL*(hashs[r].first - hashs[l-1].first + M1) * p_ip1[l-1].second % M1;
-        ans.second = 1LL*(hashs[r].second - hashs[l-1].second + M2) * p_ip2[l-1].second % M2;
+        ans.first = 1LL*(hashes[r].first - hashes[l-1].first + M1) * p_ip1[l-1].second % M1;
+        ans.second = 1LL*(hashes[r].second - hashes[l-1].second + M2) * p_ip2[l-1].second % M2;
         return ans;
     }
     pair<int, int> get_hash() {return get_hash(1, n);}
 }h, r_h;
-bool isPalindrom(int i, int j, int n) {
+bool isPalindrome(int i, int j, int n) {
     return h.get_hash(i, j) == r_h.get_hash(n - j + 1, n - (i - 1));
 }
 
@@ -65,7 +65,7 @@ vector<int> dp(N+1, -1);
 int find(int r) {
     if(r < 1)return 0;
     if(dp[r] != -1)return dp[r];
-    if(!isPalindrom(1, r, n))return 0;
+    if(!isPalindrome(1, r, n))return 0;
     return dp[r] = find(r/2) + 1;
 }
 int main() {
@@ -88,4 +88,4 @@ int main() {
     }
     return 0;
 }
-// https://codeforces.com/contest/7/submission/219550474
+// https://codeforces.com/contest/7/submission/219553252
