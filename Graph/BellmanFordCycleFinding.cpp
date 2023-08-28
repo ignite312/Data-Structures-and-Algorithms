@@ -1,12 +1,11 @@
 #include<bits/stdc++.h>
 using namespace std;
-typedef long long ll;
+#define ll long long
 const ll INF = LLONG_MAX;
 vector<tuple<int, int, ll>> edges;
-int n, m, st = 1;
 
-void BellmanFord() {
-    vector<ll> dist(n+1);//don't init INF here
+void BellmanFord(int st, int n) {
+    vector<ll> dist(n+1);// Don't init INF here because there can be a negative cycle where you can't reach from node 1
     vector<int> parent(n+1, -1);
     dist[st] = 0;
     int flag;
@@ -45,6 +44,7 @@ int main() {
   int tt;
   tt = 1;
   while(tt--) {
+    int n, m;
     cin >> n >> m;
     for(int i = 1; i <= m; i++) {
         int u, v;
@@ -53,7 +53,7 @@ int main() {
         edges.emplace_back(u, v, cost);
         // edges.emplace_back(v, u, cost);if undirected
     }
-    BellmanFord();
+    BellmanFord(1, n);
   }
 }
 // https://cses.fi/problemset/task/1197
