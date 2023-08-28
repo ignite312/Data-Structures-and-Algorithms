@@ -3,7 +3,7 @@ using namespace std;
 
 #define ll long long
 const ll INF = LLONG_MAX;
-vector<tuple<int, int, int>> edges;
+vector<tuple<int, int, ll>> edges;
 
 void BellmanFord(int st, int n) {
     vector<ll> dist(n + 1, INF);
@@ -31,7 +31,8 @@ int main() {
         int n, m;
         cin >> n >> m;       
         for (int i = 0; i < m; i++) {
-            int u, v, wt;
+            int u, v;
+            ll wt;
             cin >> u >> v >> wt;
             edges.emplace_back(u, v, wt);
         }
