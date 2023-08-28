@@ -1,15 +1,14 @@
 #include<bits/stdc++.h>
 using namespace std;
-typedef long long ll;
+#define ll long long
 const ll INF = LLONG_MAX;
 vector<tuple<int, int, int>> edges;
-int n, m, st = 1;
 
-void BellmanFord() {
+void BellmanFord(int st, int n) {
     vector<ll> dist(n+1, INF);
     vector<int> parent(n+1, -1);
     dist[st] = 0;
-    for (;;) {
+    for (int i = 0; i < n-1; i++) {
         bool any = false;
         for (auto[u, v, cost] : edges)
             if (dist[u] < INF)
@@ -38,15 +37,17 @@ int main() {
   int tt;
   tt = 1;
   while(tt--) {
+    int n, m;
     cin >> n >> m;
     for(int i = 1; i <= m; i++) {
         int u, v;
         ll cost;
         cin >> u >> v >> cost;
         edges.emplace_back(u, v, cost);
-        // edges.emplace_back(v, u, cost);if undirected
+        edges.emplace_back(v, u, cost);
     }
-    BellmanFord();
+    BellmanFord(1, n);
   }
+  return 0;
 }
-// https://codeforces.com/contest/20/submission/218048541
+// https://codeforces.com/contest/20/submission/220888074
