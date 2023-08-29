@@ -10,7 +10,6 @@ struct Edge {
     Edge(){}
     Edge(int u, int v, ll wt) : u(u), v(v), wt(wt){}
 };
-
 bool bellmanFord(int st, int n, vector<Edge> &edges, vector<ll> &dist) {
     dist[st] = 0;
     for(int i = 0; i <= n; i++) {
@@ -27,7 +26,7 @@ bool bellmanFord(int st, int n, vector<Edge> &edges, vector<ll> &dist) {
     }
     return false;
 }
-vector<ll> dijkstra(int source, int n, vector<Edge> &edges, vector<ll> &h, const vector<pair<ll, int>> G[]) {
+vector<ll> dijkstra(int source, int n, vector<Edge> &edges, const vector<pair<ll, int>> G[]) {
     set<pair<ll, int>> st;
     vector<ll> dist(n+1, INF);
     vector<bool> vis(n+1, false);
@@ -63,7 +62,7 @@ bool johnson(vector<Edge> &edges, int n) {
     vector<pair<ll, int>> G[n+1];
     for(auto ed : edges) {G[ed.u].emplace_back(ed.v, ed.wt + h[ed.u] - h[ed.v]);}
     for(int i = 1; i <= n; i++) {
-        vector<ll> dist = dijkstra(i, n, edges, h, G);
+        vector<ll> dist = dijkstra(i, n, edges, G);
         for(int j = 1; j <= n; j++) {
             if(dist[j] < INF) dist[j] -= h[i] - h[j];
             ans[i][j] = dist[j];
