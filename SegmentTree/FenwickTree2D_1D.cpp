@@ -1,4 +1,3 @@
-//https://cses.fi/problemset/task/1739/
 #include<bits/stdc++.h>
 using namespace std;
 
