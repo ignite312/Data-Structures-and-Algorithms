@@ -9,18 +9,17 @@ int parent[N + 5], en, st;
 void dfs(int vertex, int par) {
     vis[vertex] = true;
     for (auto child : G[vertex]) {
-        if (vis[child] && par == child) continue;
-        if (!vis[child]) {
+        if(par == child) continue;
+        if(!vis[child]) {
             parent[child] = vertex;
             dfs(child, vertex);
-        } else {
-            if (!cycle_found) en = vertex, st = child;
+        }else {
+            if(!cycle_found) en = vertex, st = child;
             cycle_found = true;
             return;
         }
     }
 }
-
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(0);
