@@ -31,12 +31,12 @@ int get_lca(int a, int b) {
     }
     return up[a][0];
 }
-int getKthAncestor(int a, int k) {
-	for(int i = LOG-1; i >= 0; i--)
-		if(k & (1 << i))
-			a = up[a][i];
-	return a;
-}
+// int getKthAncestor(int a, int k) {
+// 	for(int i = LOG-1; i >= 0; i--)
+// 		if(k & (1 << i))
+// 			a = up[a][i];
+// 	return a;
+// }
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(0);
