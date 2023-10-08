@@ -47,9 +47,7 @@ struct Segtree {
         if(l > j || r < i) return INT_MIN;
         if(l >= i && r <= j)return tree[node];
         int mid = l + (r - l)/2;
-        int ans1 = query(i, j, node*2+1, l, mid);
-        int ans2 = query(i, j, node*2+2, mid+1, r);
-        return merge(ans1, ans2);
+        return merge(query(i, j, node*2+1, l, mid), query(i, j, node*2+2, mid+1, r));
     }
     int query(int i, int j) {
         return query(i, j, 0, 0, size-1);
