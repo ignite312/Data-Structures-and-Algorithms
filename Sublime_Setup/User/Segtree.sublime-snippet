@@ -1,0 +1,56 @@
+<snippet>
+	<content><![CDATA[
+struct Segtree {
+    int size;
+    vector<int> tree;
+ 
+    void init(int n) {
+        size = 1;
+        while(size < n) size = size << 1;
+        tree.assign(2*size - 1, 0);
+    }
+    int merge(int x, int y) {
+        return max(x, y);
+    }
+    void build(vector<int> &a, int node, int l, int r) {
+        if(l == r) {
+            tree[node] = a[l];
+            return;
+        }
+        int mid = l + (r - l)/2;
+        build(a, node*2+1, l, mid);
+        build(a, node*2+2, mid+1, r);
+        tree[node] = merge(tree[node*2+1], tree[node*2+2]);
+    }
+    void build(vector<int> &a) {
+        build(a, 0, 0, size-1);
+    }
+    void update(int i, int value, int node, int l, int r) {
+        if(l == i && r == i) {
+            tree[node] = value;
+            return;
+        }
+        int mid = l + (r-l)/2;
+        if(i <= mid)update(i, value, node*2+1, l, mid);
+        else update(i, value, node*2+2, mid+1, r);
+        tree[node] = merge(tree[node*2+1], tree[node*2+2]);
+    }
+    void update(int i, int value) {
+        update(i, value, 0, 0, size-1);
+    }
+    int query(int i, int j, int node, int l, int r) {
+        if(l > j || r < i) return INT_MIN;
+        if(l >= i && r <= j)return tree[node];
+        int mid = l + (r - l)/2;
+        return merge(query(i, j, node*2+1, l, mid), query(i, j, node*2+2, mid+1, r));
+    }
+    int query(int i, int j) {
+        return query(i, j, 0, 0, size-1);
+    }
+} st;
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>Seg</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.c++</scope> -->
+</snippet>
