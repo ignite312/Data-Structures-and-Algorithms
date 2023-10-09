@@ -81,3 +81,5 @@ int main() {
     }
     return 0;
 }
+// https://codeforces.com/contest/600/submission/227278225
+// https://codeforces.com/blog/entry/44351
