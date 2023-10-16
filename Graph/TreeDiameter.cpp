@@ -45,5 +45,5 @@ int main() {
     cout << dept_now << "\n";
   }
 }
-// https://cses.fi/problemset/task/1131\
+// https://cses.fi/problemset/task/1131
 // https://codeforces.com/contest/1881/problem/F
