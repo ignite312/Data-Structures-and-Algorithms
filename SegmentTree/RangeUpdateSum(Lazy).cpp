@@ -3,15 +3,9 @@ using namespace std;
 #define ll long long
  
 struct Segtree {
-    int size;
+    int n;
     vector<ll> tree, lazy;
  
-    void init(int n) {
-        size = 1;
-        while(size < n) size = size << 1;
-        tree.assign(2*size - 1, 0);
-        lazy.assign(2*size - 1, 0);
-    }
     ll merge(ll x, ll y) {
         return x + y;
     }
@@ -32,7 +26,7 @@ struct Segtree {
         tree[node] = merge(tree[node*2+1], tree[node*2+2]);
     }
     void build(vector<ll> &a) {
-        build(a, 0, 0, size-1);
+        build(a, 0, 0, n-1);
     }
     void update(int i, int j, ll value, int node, int l, int r) {
         if(l > j || r < i)return;
@@ -47,7 +41,7 @@ struct Segtree {
         tree[node] = merge(tree[node*2+1], tree[node*2+2]);
     }
     void update(int i, int j, ll value) {
-        update(i, j, value, 0, 0, size-1);
+        update(i, j, value, 0, 0, n-1);
     }
     ll query(int i, int j, int node, int l, int r) {
         if(l > j || r < i)
@@ -60,23 +54,30 @@ struct Segtree {
         return merge(query(i, j, node*2+1, l, mid), query(i, j, node*2+2, mid+1, r));
     }
     ll query(int i, int j) {
-        return query(i, j, 0, 0, size-1);
+        return query(i, j, 0, 0, n-1);
+    }
+    int sz(int n) {
+        int size = 1;
+        while(size < n) size = size << 1;
+        return 2*size-1;
+    }
+    void init(vector<ll> &a) {
+        n = a.size();
+        int _sz = sz(n);
+        tree.resize(_sz);
+        lazy.assign(_sz, 0);
+        build(a, 0, 0, n-1);
     }
 } st;
-/*
+/* Static Update
 struct Segtree {
-    int size;
-    vector<int> tree;
- 
-    void init(int n) {
-        size = 1;
-        while(size < n) size = size << 1;
-        tree.assign(2*size - 1, 0);
+    int n;
+    vector<ll> tree;
+
+    ll merge(ll x, ll y) {
+        return x + y;
     }
-    int merge(int x, int y) {
-        return max(x, y);
-    }
-    void build(vector<int> &a, int node, int l, int r) {
+    void build(vector<ll> &a, int node, int l, int r) {
         if(l == r) {
             tree[node] = a[l];
             return;
@@ -86,10 +87,7 @@ struct Segtree {
         build(a, node*2+2, mid+1, r);
         tree[node] = merge(tree[node*2+1], tree[node*2+2]);
     }
-    void build(vector<int> &a) {
-        build(a, 0, 0, size-1);
-    }
-    void update(int i, int value, int node, int l, int r) {
+    void update(int i, ll value, int node, int l, int r) {
         if(l == i && r == i) {
             tree[node] = value;
             return;
@@ -100,16 +98,27 @@ struct Segtree {
         tree[node] = merge(tree[node*2+1], tree[node*2+2]);
     }
     void update(int i, int value) {
-        update(i, value, 0, 0, size-1);
+        update(i, value, 0, 0, n-1);
     }
-    int query(int i, int j, int node, int l, int r) {
-        if(l > j || r < i) return INT_MIN;
+    ll query(int i, int j, int node, int l, int r) {
+        if(l > j || r < i) return 0;
         if(l >= i && r <= j)return tree[node];
         int mid = l + (r - l)/2;
         return merge(query(i, j, node*2+1, l, mid), query(i, j, node*2+2, mid+1, r));
     }
-    int query(int i, int j) {
-        return query(i, j, 0, 0, size-1);
+    ll query(int i, int j) {
+        return query(i, j, 0, 0, n-1);
+    }
+    int sz(int n) {
+        int size = 1;
+        while(size < n) size = size << 1;
+        return 2*size-1;
+    }
+    void init(vector<ll> &a) {
+        n = a.size();
+        int _sz = sz(n);
+        tree.resize(_sz);
+        build(a, 0, 0, n-1);
     }
 } st;
 */
@@ -123,7 +132,7 @@ int main() {
         cin >> n >> q;
         vector<ll> a(n);
         for(int i = 0; i < n; i++)cin >> a[i];
-        st.init(n), st.build(a);
+        st.init(a);
         while(q--) {
             int type;
             cin >> type;
@@ -141,4 +150,6 @@ int main() {
     }
     return 0;
 }
+// https://cses.fi/problemset/task/1648
 // https://cses.fi/problemset/task/1651/
+// https://codeforces.com/contest/1872/problem/E
