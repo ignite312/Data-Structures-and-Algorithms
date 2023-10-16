@@ -1,56 +1,118 @@
 #include<bits/stdc++.h>
 using namespace std;
-typedef long long ll;
-const int N = 2e5 + 5;
-ll lazy[N*4+5], tree[N*4+5];
-
-void build(vector<ll> &arr, int node, int l, int r) {
-    if(l == r) {
-        tree[node] = arr[l];
-        return;
+#define ll long long
+ 
+struct Segtree {
+    int size;
+    vector<ll> tree, lazy;
+ 
+    void init(int n) {
+        size = 1;
+        while(size < n) size = size << 1;
+        tree.assign(2*size - 1, 0);
+        lazy.assign(2*size - 1, 0);
     }
-    int mid = l + (r - l)/2;
-    build(arr, node*2, l, mid);
-    build(arr, node*2+1, mid+1, r);
-    tree[node] = tree[node*2] + tree[node*2+1];
-}
-void update(int node, int l, int r, int i, int j, ll value) {
-    if(lazy[node] != 0) {
-        tree[node] += (r-l+1)*lazy[node];
-        if(l != r) {
-            lazy[node*2]+=lazy[node];
-            lazy[node*2+1]+=lazy[node]; 
-        }
+    ll merge(ll x, ll y) {
+        return x + y;
+    }
+    void push(int node, int l, int r) {
+        tree[node]+=(r-l+1)*lazy[node];
+        int a = node*2+1, b = node*2+2;
+        lazy[a]+=lazy[node], lazy[b]+=lazy[node];
         lazy[node] = 0;
     }
-    if(l > j || r < i)return;
-    if(l >= i && r <= j) {
-        tree[node] += (r-l+1)*value;
-        if(l != r) {
-            lazy[node*2]+= value;
-            lazy[node*2+1]+=value; 
+    void build(vector<ll> &a, int node, int l, int r) {
+        if(l == r) {
+            tree[node] = a[l];
+            return;
         }
-        return;
+        int mid = l + (r - l)/2;
+        build(a, node*2+1, l, mid);
+        build(a, node*2+2, mid+1, r);
+        tree[node] = merge(tree[node*2+1], tree[node*2+2]);
     }
-    int mid = l + (r - l)/2;
-    update(node*2, l, mid, i, j, value);
-    update(node*2+1, mid+1, r, i, j, value);
-    tree[node] = tree[node*2] + tree[node*2+1];
-}
-ll sum(int node, int l, int r, int i, int j) {
-    if(lazy[node] != 0) {
-        tree[node] += (r-l+1)*lazy[node];
-        if(l != r) {
-            lazy[node*2]+=lazy[node];
-            lazy[node*2+1]+=lazy[node]; 
+    void build(vector<ll> &a) {
+        build(a, 0, 0, size-1);
+    }
+    void update(int i, int j, ll value, int node, int l, int r) {
+        if(l > j || r < i)return;
+        if(l >= i && r <= j) {
+            lazy[node]+=value;
+            return;
         }
-        lazy[node] = 0;
+        if(lazy[node])push(node, l, r);
+        int mid = l + (r-l)/2;
+        update(i, j, value, node*2+1, l, mid);
+        update(i, j, value, node*2+2, mid+1, r);
+        tree[node] = merge(tree[node*2+1], tree[node*2+2]);
     }
-    if(l > j || r < i)return 0;
-    if(l >= i && r <= j) return tree[node];
-    int mid = l + (r - l)/2;
-    return sum(node*2, l, mid, i, j) + sum(node*2+1, mid+1, r, i, j);
-}
+    void update(int i, int j, ll value) {
+        update(i, j, value, 0, 0, size-1);
+    }
+    ll query(int i, int j, int node, int l, int r) {
+        if(l > j || r < i)
+            return 0;
+        if(l >= i && r <= j)
+            return tree[node] + (r-l+1)*lazy[node];
+ 
+        if(lazy[node]) push(node, l, r);
+        int mid = l + (r - l)/2;
+        return merge(query(i, j, node*2+1, l, mid), query(i, j, node*2+2, mid+1, r));
+    }
+    ll query(int i, int j) {
+        return query(i, j, 0, 0, size-1);
+    }
+} st;
+/*
+struct Segtree {
+    int size;
+    vector<int> tree;
+ 
+    void init(int n) {
+        size = 1;
+        while(size < n) size = size << 1;
+        tree.assign(2*size - 1, 0);
+    }
+    int merge(int x, int y) {
+        return max(x, y);
+    }
+    void build(vector<int> &a, int node, int l, int r) {
+        if(l == r) {
+            tree[node] = a[l];
+            return;
+        }
+        int mid = l + (r - l)/2;
+        build(a, node*2+1, l, mid);
+        build(a, node*2+2, mid+1, r);
+        tree[node] = merge(tree[node*2+1], tree[node*2+2]);
+    }
+    void build(vector<int> &a) {
+        build(a, 0, 0, size-1);
+    }
+    void update(int i, int value, int node, int l, int r) {
+        if(l == i && r == i) {
+            tree[node] = value;
+            return;
+        }
+        int mid = l + (r-l)/2;
+        if(i <= mid)update(i, value, node*2+1, l, mid);
+        else update(i, value, node*2+2, mid+1, r);
+        tree[node] = merge(tree[node*2+1], tree[node*2+2]);
+    }
+    void update(int i, int value) {
+        update(i, value, 0, 0, size-1);
+    }
+    int query(int i, int j, int node, int l, int r) {
+        if(l > j || r < i) return INT_MIN;
+        if(l >= i && r <= j)return tree[node];
+        int mid = l + (r - l)/2;
+        return merge(query(i, j, node*2+1, l, mid), query(i, j, node*2+2, mid+1, r));
+    }
+    int query(int i, int j) {
+        return query(i, j, 0, 0, size-1);
+    }
+} st;
+*/
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(0);
@@ -59,24 +121,24 @@ int main() {
     while(tt--) {
         int n, q;
         cin >> n >> q;
-        vector<ll> arr(n+1);
-        for(int i = 1; i <= n; i++) {
-            cin >> arr[i];
-        }
-        build(arr, 1, 1, n);
+        vector<ll> a(n);
+        for(int i = 0; i < n; i++)cin >> a[i];
+        st.init(n), st.build(a);
         while(q--) {
             int type;
             cin >> type;
             if(type == 1) {
-                int i, j, value;
+                int i, j;
+                ll value;
                 cin >> i >> j >> value;
-                update(1, 1, n, i, j, value);
+                st.update(--i, --j, value);
             }else {
                 int i;
                 cin >> i;
-                cout << sum(1, 1, n, i, i) << "\n";
+                cout << st.query(i-1, i-1) << "\n";
             }
         }
     }
+    return 0;
 }
-// https://cses.fi/problemset/task/1651
+// https://cses.fi/problemset/task/1651/
