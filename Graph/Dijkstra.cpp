@@ -46,4 +46,5 @@ int main() {
     for(int i = 1; i <= n; i++)cout << dist[i] << " ";
   }
 }
-// https://cses.fi/problemset/task/1671
+//* https://cses.fi/problemset/task/1671
+// https://cses.fi/problemset/task/1202
