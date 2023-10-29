@@ -1,0 +1,55 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define ll long long
+const int N = 1e5+1;
+vector<bool> is_prime(N+1, true);
+
+vector<ll> divisor(ll a) {
+    vector<ll> divisors;
+    for (ll i = 1; i*i <= a; ++i) {
+        if(a % i == 0) {
+            if(a / i == i)divisors.push_back(i);
+            else {
+                divisors.push_back(i);
+                divisors.push_back(a/i);
+            }
+        }
+    }
+    return divisors;
+}
+void sieve() {
+    is_prime[0] = is_prime[1] = false;
+    for (int i = 2; i * i <= N; i++) {
+        if (is_prime[i]) {
+            for (int j = i * i; j <= N; j += i)
+                is_prime[j] = false;
+        }
+    }
+}
+vector<ll> prime_factorization(ll n) {
+    vector<ll> factorization;
+    while (n % 2 == 0) {
+        factorization.push_back(2);
+        n /= 2;
+    }
+    for (ll d = 3; d * d <= n; d += 2) {
+        while (n % d == 0) {
+            factorization.push_back(d);
+            n /= d;
+        }
+    }
+    if (n > 1) factorization.push_back(n);
+    return factorization;
+}
+int main() {
+  ios::sync_with_stdio(false);
+  cin.tie(0);
+  int tt;
+  tt = 1;
+  cin >> tt;
+  while(tt--) {
+    int n;
+    cin >> n;
+  }
+  return 0;
+}
