@@ -48,3 +48,6 @@ int main() {
     }
     return 0;
 }
+/*Resources*/
+//Graph Coloring
+// https://cp-algorithms.com/graph/bipartite-check.html(another approach)
