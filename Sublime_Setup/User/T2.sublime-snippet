@@ -3,8 +3,6 @@
 #include<bits/stdc++.h>
 using namespace std;
 #define ll long long
-#define sz(x) (int) (x).size()
-#define all(v) v.begin(), v.end()
 const int N = 2e5 + 5;
 
 int main() {
@@ -16,9 +14,9 @@ int main() {
     while(tt--) {
         int n;
         cin >> n;
-        vector<int> arr(n);
+        vector<int> v(n);
         for(int i = 0; i < n; i++) {
-            cin >> arr[i];
+            cin >> v[i];
         }
         cout << "Case " << cs++ << ": " << n << "\n";
     }
