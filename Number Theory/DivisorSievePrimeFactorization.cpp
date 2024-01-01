@@ -47,6 +47,13 @@ vector<ll> prime_factorization(ll n) {
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(0);
+    /*Counting Divisors Nlog(N)
+    for(int i = 1; i <= N; i++) {
+        for(int j = i; j <= N; j+=i) {
+            divisor[j]++;
+        }
+    }
+    */
     int tt;
     cin >> tt;
     while(tt--) {
