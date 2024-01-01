@@ -4,6 +4,7 @@ using namespace std;
 const int N = 1e5+1;
 vector<bool> is_prime(N+1, true);
 
+/*O(sqrt(N))*/
 vector<ll> divisor(ll a) {
     vector<ll> divisors;
     for (ll i = 1; i*i <= a; ++i) {
@@ -17,6 +18,7 @@ vector<ll> divisor(ll a) {
     }
     return divisors;
 }
+/*O(Nlog(log(N)))*/
 void sieve() {
     is_prime[0] = is_prime[1] = false;
     for (int i = 2; i * i <= N; i++) {
@@ -26,6 +28,7 @@ void sieve() {
         }
     }
 }
+/*O(sqrt(N))*/
 vector<ll> prime_factorization(ll n) {
     vector<ll> factorization;
     while (n % 2 == 0) {
@@ -42,14 +45,13 @@ vector<ll> prime_factorization(ll n) {
     return factorization;
 }
 int main() {
-  ios::sync_with_stdio(false);
-  cin.tie(0);
-  int tt;
-  tt = 1;
-  cin >> tt;
-  while(tt--) {
-    int n;
-    cin >> n;
-  }
-  return 0;
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+    int tt;
+    cin >> tt;
+    while(tt--) {
+        int n;
+        cin >> n;
+    }
+    return 0;
 }
