@@ -4,6 +4,15 @@ using namespace std;
 const int N = 1e5+1;
 vector<bool> is_prime(N+1, true);
 
+/*O(Nlog(log(N)))*/
+void divisors() {
+    vector<vector<int>> d(N+1);
+    for(int i = 1; i <= N; i++) {
+        for(int j = i; j <= N; j+=i) {
+            d[j].push_back(i);
+        }
+    }
+}
 /*O(sqrt(N))*/
 vector<ll> divisor(ll a) {
     vector<ll> divisors;
