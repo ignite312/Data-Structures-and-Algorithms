@@ -5,7 +5,7 @@ vector<int> G[N+5];
 int colors[N+5];
 int st[N+5], en[N+5];
 int Time = 0;
-
+ 
 int arr[N+5], freq[N+5], distinct;
 const int rootN = 555;
  
