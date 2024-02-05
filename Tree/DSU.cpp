@@ -21,18 +21,20 @@ void union_sets(int a, int b) {
         Size[a]+=Size[b];
     }
 }
-// Union by Rank
-// void union_sets(int a, int b) {
-//     a = find_set(a);
-//     b = find_set(b);
-//     if (a != b) {
-//         if (rank[a] < rank[b])
-//             swap(a, b);
-//         parent[b] = a;
-//         if (rank[a] == rank[b])
-//             rank[a]++;
-//     }
-// }
+/*
+Union by Rank
+void union_sets(int a, int b) {
+    a = find_set(a);
+    b = find_set(b);
+    if (a != b) {
+        if (rank[a] < rank[b])
+            swap(a, b);
+        parent[b] = a;
+        if (rank[a] == rank[b])
+            rank[a]++;
+    }
+}
+*/
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(0);
