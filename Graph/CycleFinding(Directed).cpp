@@ -56,3 +56,4 @@ int main(){
   return 0;
 }
 // https://cses.fi/problemset/task/1678/
+// https://codeforces.com/contest/1931/problem/F
