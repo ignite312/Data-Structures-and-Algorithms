@@ -1,3 +1,7 @@
+/*
+https://codeforces.com/contest/1808/problem/C
+*/
+
 #include<bits/stdc++.h>
 using namespace std;
 string a, b;
@@ -21,10 +25,10 @@ int f(int idx, int lo, int hi, string s, int tight, bool is_started) {
         if(is_started || i != '0')is_started = true, t_lo = min(lo, i-'0');
         if(i == st) {
             if(tight == 0 && st != en) t_ans = min(t_ans, f(idx+1, t_lo, max(hi, i-'0'), s+i, 1, is_started));
-            t_ans = min(t_ans, f(idx+1, t_lo, max(hi, i-'0'), s+i, tight, is_started));
+            else t_ans = min(t_ans, f(idx+1, t_lo, max(hi, i-'0'), s+i, tight, is_started));
         }else if(i == en) {
             if(tight == 0) t_ans = min(t_ans, f(idx+1, t_lo, max(hi, i-'0'), s+i, 2, is_started));
-            t_ans = min(t_ans, f(idx+1, t_lo, max(hi, i-'0'), s+i, tight, is_started));
+            else t_ans = min(t_ans, f(idx+1, t_lo, max(hi, i-'0'), s+i, tight, is_started));
         }else t_ans = min(t_ans, f(idx+1, t_lo, max(hi, i-'0'), s+i, 3, is_started));
     }
     return dp[idx][lo][hi][tight] = t_ans;
@@ -50,4 +54,4 @@ int main() {
     return 0;
 }
 
-// https://codeforces.com/contest/1808/submission/247666995
+// https://codeforces.com/contest/1808/submission/247765772

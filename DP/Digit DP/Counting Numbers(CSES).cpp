@@ -1,9 +1,13 @@
+/*
+https://cses.fi/problemset/task/2220/
+*/
+
 #include<bits/stdc++.h>
 using namespace std;
 #define ll long long
 ll dp[20][10][2][2];
  
-ll solve(string &number, int n, int prev_digit, int idx, int leading_zeroes, int tight) {
+ll f(int idx, int prev_digit, int leading_zeroes, int tight, string &number, int n) {
     if(idx == n)return 1;
     if(dp[idx][prev_digit][leading_zeroes][tight] != -1 && prev_digit != -1)return dp[idx][prev_digit][leading_zeroes][tight];
  
@@ -13,7 +17,7 @@ ll solve(string &number, int n, int prev_digit, int idx, int leading_zeroes, int
     for(int digit = lb; digit <= up; digit++) {
         if(prev_digit == digit && digit != 0)continue;
         if(prev_digit == digit && digit == 0 && !leading_zeroes)continue;
-        ans = ans + solve(number, n, digit, idx+1, leading_zeroes & (digit == 0), tight & (digit == up));
+        ans = ans + f(idx+1, digit, leading_zeroes & (digit == 0), tight & (digit == up), number, n);
     }
     return dp[idx][prev_digit][leading_zeroes][tight] = ans;
 }
@@ -32,11 +36,9 @@ int main() {
         int ln_a = (ll)a.length();
         int ln_b = (ll)b.length();
         memset(dp, -1, sizeof(dp));
-        ll ans = solve(b, ln_b, -1, 0, 1, 1);
+        ll ans = f(0, -1, 1, 1, b, ln_b);
         memset(dp, -1, sizeof(dp));
-        cout << ans - solve(a, ln_a, -1, 0, 1, 1) << "\n";
+        cout << ans - f(0, -1, 1, 1, a, ln_a) << "\n";
     }
     return 0;
 }
-
-// https://cses.fi/problemset/task/2220/

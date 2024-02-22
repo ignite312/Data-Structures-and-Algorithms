@@ -1,3 +1,7 @@
+/*
+https://codeforces.com/contest/628/problem/D
+*/
+
 #include<bits/stdc++.h>
 using namespace std;
 #define ll long long
@@ -25,10 +29,9 @@ ll f(int idx = 0, ll rem = 0, int small = 0) {
                 if(i != d)x = (x + f(idx+1, (rem*10 + i) % m, 1)) % M;
         }else {
             for(int i = 0; i < s[idx] - '0'; i++) {
-                if(idx == 0 && i == 0)continue;
                 if(i != d)x = (x + f(idx+1, (rem*10 + i) % m, 1)) % M;
             }
-            if(s[idx] - '0' != d && !(s[idx] - '0' == 0 && idx == 0)) x = (x + f(idx+1, (rem*10 + s[idx]-'0') % m, 0)) % M;
+            if(s[idx] - '0' != d) x = (x + f(idx+1, (rem*10 + s[idx]-'0') % m, 0)) % M;
         }
     }
     x = x % M;
@@ -68,4 +71,4 @@ int main() {
     return 0;
 }
 
-// https://codeforces.com/contest/628/submission/244917995
+// https://codeforces.com/contest/628/submission/247772973
