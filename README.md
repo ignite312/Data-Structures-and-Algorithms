@@ -1,0 +1,1 @@
+###### This repository contains some implementations of basic data structures and algorithms, code templates, snippets, and all the necessary stuff needed for competitive programming. I will try to add all kinds of problems I solve on many online judges based on the topics.
