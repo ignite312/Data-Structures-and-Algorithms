@@ -1,28 +1,32 @@
+/*
+Problem Name: Shortest Routes I
+Problem Link: https://cses.fi/problemset/task/1671/
+*/
 #include<bits/stdc++.h>
 using namespace std;
-typedef long long ll;
-const int N = 1e5+1;
+#define ll long long
+const int N = 100000;
 const ll INF = LLONG_MAX;
-vector<pair<int, ll>> G[N+1];
+vector<pair<int, ll>> adj[N+1];
 vector<bool> vis(N+1);
-vector<ll> dist(N+1, INF);
-
-void dijkstra(int source) {
+vector<ll> d(N+1, INF);
+ 
+void dijkstra(int s) {
     set<pair<ll, int>> st;
-    st.insert({0, source});
-    dist[source] = 0;
+    st.insert({0, s});
+    d[s] = 0;
     while(st.size() > 0) {
         auto node = *st.begin();
-        int curr_node = node.second;
+        int u = node.second;
         st.erase(st.begin());
-        if(vis[curr_node])continue;
-        vis[curr_node] = true;
-        for(auto child : G[curr_node]) {
-            int child_node = child.first;
+        if(vis[u])continue;
+        vis[u] = true;
+        for(auto child : adj[u]) {
+            int v = child.first;
             ll wt = child.second;
-            if(dist[curr_node] + wt  < dist[child_node]) {
-                dist[child_node] = dist[curr_node] + wt;
-                st.insert({dist[child_node], child_node});
+            if(d[u] + wt  < d[v]) {
+                d[v] = d[u] + wt;
+                st.insert({d[v], v});
             }
         }
     }
@@ -40,13 +44,10 @@ int main() {
         int u, v;
         ll wt;
         cin >> u >> v >> wt;
-        G[u].push_back({v, wt});
+        adj[u].push_back({v, wt});
     }
     dijkstra(1);
-    for(int i = 1; i <= n; i++)cout << dist[i] << " ";
+    for(int i = 1; i <= n; i++)cout << d[i] << " ";
+        cout << "\n";
   }
 }
-//* https://cses.fi/problemset/task/1671
-// https://cses.fi/problemset/task/1202
-// https://cses.fi/problemset/task/1196/
-// https://cses.fi/problemset/task/1195

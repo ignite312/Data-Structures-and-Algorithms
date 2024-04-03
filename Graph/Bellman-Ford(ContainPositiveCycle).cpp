@@ -1,21 +1,25 @@
+/*
+Problem Name: High Score
+Problem Link: https://cses.fi/problemset/task/1673/
+*/
 #include<bits/stdc++.h>
 using namespace std;
 #define ll long long
 const ll INF = LLONG_MAX;
-const int N = 2500+1;
+const int N = 2500;
 vector<tuple<int, int, ll>> edges;
 bool mark[N+1], vis[N+1];
-vector<int> G[N+1];
-vector<ll> dist(N+1, -INF);
+vector<int> adj[N+1];
+vector<ll> d(N+1, -INF);
  
-void BellmanFord(int st, int n) {
-    dist[st] = 0;
+void BellmanFord(int s, int n) {
+    d[s] = 0;
     for(int i = 0; i < n-1; i++) {
         bool any = false;
         for(auto[u, v, wt] : edges) {
-            if(dist[u] > -INF) {
-                if(dist[u] + wt > dist[v]) {
-                    dist[v] = dist[u] + wt;
+            if(d[u] > -INF) {
+                if(d[u] + wt > d[v]) {
+                    d[v] = d[u] + wt;
                     any = true;
                 }
             }
@@ -23,15 +27,15 @@ void BellmanFord(int st, int n) {
         if(!any)break;
     }
     for(auto[u, v, wt] : edges)
-        if(dist[u] > -INF)
-            if(dist[u] + wt > dist[v])
-                mark[v] = true;
+        if(d[u] > -INF)
+            if(d[u] + wt > d[v])
+                mark[v] = true; // Mark all the node that are responsible for positive cycle
 }
-void dfs(int vertex) {
-    vis[vertex] = true;
-    for(auto child : G[vertex])
-        if(!vis[child])
-            dfs(child);
+void dfs(int u) {
+    vis[u] = true;
+    for(auto v : adj[u])
+        if(!vis[v])
+            dfs(v);
 }
 int main() {
     ios::sync_with_stdio(false);
@@ -45,22 +49,23 @@ int main() {
             int u, v;
             ll wt;
             cin >> u >> v >> wt;
-            G[u].push_back(v);
+            adj[u].push_back(v);
             edges.emplace_back(u, v, wt);
         }
         BellmanFord(1, n);
         for(int i = 1; i <= n; i++) {
             if(mark[i]) {
                 for(int i = 0; i <= n; i++)vis[i] = false;
-                dfs(i);
+                // Run a dfs from the node that are responsible for positive cycle
+                // If we can reach node n from this that will make arbitrarily large score
+                dfs(i); 
                 if(vis[n]) {
                     cout << "-1";
                     return 0;
                 }
             }
         }
-        cout << dist[n] << "\n";
+        cout << d[n] << "\n";
     }
     return 0;
 }
-// https://cses.fi/problemset/task/1673

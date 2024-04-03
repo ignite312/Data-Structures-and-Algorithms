@@ -1,25 +1,29 @@
+/*
+Problem Name: Shortest Routes II
+Problem Link: https://cses.fi/problemset/task/1672/
+*/
 #include<bits/stdc++.h>
 using namespace std;
-typedef long long ll;
-const int N = 500 + 5;
+#define ll long long 
+const int N = 500;
 const ll INF = LLONG_MAX;
-ll dist[N+5][N+5];
+ll d[N+1][N+1];
 int n, m;
-
+ 
 void init() {
     for(int i = 0; i < n; i++) {
         for(int j = 0; j < n; j++) {
-            dist[i][j] = INF;
+            d[i][j] = INF;
         }
-        dist[i][i] = 0;
+        d[i][i] = 0;
     }
 }
 void floydWarshall() {
     for (int k = 0; k < n; ++k) {
         for (int i = 0; i < n; ++i) {
             for (int j = 0; j < n; ++j) {
-                if (dist[i][k] < INF && dist[k][j] < INF) {
-                    dist[i][j] = min(dist[i][j], dist[i][k] + dist[k][j]);
+                if (d[i][k] < INF && d[k][j] < INF) {
+                    d[i][j] = min(d[i][j], d[i][k] + d[k][j]);
                 } 
             }
         }
@@ -39,17 +43,17 @@ int main() {
         ll wt;
         cin >> u >> v >> wt;
         --u, --v;
-        dist[u][v] = min(dist[u][v], wt);
-        dist[v][u] = min(dist[v][u], wt);
+        d[u][v] = min(d[u][v], wt);
+        d[v][u] = min(d[v][u], wt);
     }
     floydWarshall();
     while(q--) {
         int st, en;
         cin >> st >> en;
         --st, --en;
-        if(dist[st][en] != INF)cout << dist[st][en] << "\n";
+        if(d[st][en] != INF)cout << d[st][en] << "\n";
         else cout << "-1" << "\n";
     }
   }
+  return 0;
 }
-// https://cses.fi/problemset/task/1672

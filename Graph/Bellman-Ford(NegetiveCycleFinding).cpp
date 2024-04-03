@@ -1,23 +1,28 @@
+/*
+Problem Name: Cycle Finding
+Problem Link: https://cses.fi/problemset/task/1197/
+*/
 #include<bits/stdc++.h>
 using namespace std;
 #define ll long long
-const ll INF = LLONG_MAX;
 vector<tuple<int, int, ll>> edges;
-
-void BellmanFord(int st, int n) {
-    vector<ll> dist(n+1);// Don't init INF here because there can be a negative cycle where you can't reach from node 1
+ 
+void BellmanFord(int s, int n) {
+    vector<ll> dist(n+1, 0);// No need to init INF here because there can be a negative cycle where you can't reach from node 1
+                        // and the Graph is not necessarily connected
+                        // Our concern is about to find negetive cycle not shortest distance
     vector<int> parent(n+1, -1);
-    dist[st] = 0;
+    dist[s] = 0;
     int flag;
     for (int i = 0; i < n; i++) {
         flag = -1;
-        for (auto[u, v, cost] : edges)
-            if (dist[u] < INF)
-                if (dist[v] > dist[u] + cost) {
+        for (auto[u, v, cost] : edges) {
+            if (dist[u] + cost < dist[v]) {
                     dist[v] = dist[u] + cost;
                     parent[v] = u;
                     flag = v;
-                }
+            }
+        }
     }
     if (flag == -1)
         cout << "NO\n";
@@ -25,7 +30,7 @@ void BellmanFord(int st, int n) {
         int y = flag;
         for (int i = 0; i < n; ++i)
             y = parent[y];
-
+ 
         vector<int> path;
         for (int cur = y;; cur = parent[cur]) {
             path.push_back(cur);
@@ -51,9 +56,9 @@ int main() {
         ll cost;
         cin >> u >> v >> cost;
         edges.emplace_back(u, v, cost);
-        // edges.emplace_back(v, u, cost);if undirected
+        // edges.emplace_back(v, u, cost); if undirected
     }
     BellmanFord(1, n);
   }
+  return 0;
 }
-// https://cses.fi/problemset/task/1197

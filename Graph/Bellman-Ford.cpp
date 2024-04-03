@@ -1,13 +1,18 @@
+/*
+Problem Name: Shortest Routes I
+Problem Link: https://cses.fi/problemset/task/1671/
+*/
+
+// This implementation will give TLE just to confirm that out algorithm are working perfectly
 #include<bits/stdc++.h>
 using namespace std;
-
 #define ll long long
 const ll INF = LLONG_MAX;
 vector<tuple<int, int, ll>> edges;
 
-void BellmanFord(int st, int n) {
+void BellmanFord(int s, int n) {
     vector<ll> dist(n + 1, INF);
-    dist[st] = 0;  
+    dist[s] = 0;  
     for (int i = 0; i < n - 1; i++) {
         bool any = false;  
         for (auto [u, v, wt] : edges) {
@@ -40,4 +45,3 @@ int main() {
     }
     return 0;
 }
-// https://cses.fi/problemset/task/1671

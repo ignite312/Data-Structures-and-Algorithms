@@ -1,22 +1,26 @@
+/*
+Problem Name: Round Trip II
+Problem Link: https://cses.fi/problemset/task/1678/
+*/
 #include<bits/stdc++.h>
 using namespace std;
-const int N = 1e5 + 5;
-vector<int> G[N+5], parent(N+5);
-vector<int> color(N+5);
+const int N = 100000;
+vector<int> adj[N+1], parent(N+1);
+vector<int> color(N+1);
 int st, en;
-
-bool dfs(int vertex) {
-    color[vertex] = 1;
-    for(auto child : G[vertex]) {
-        if(!color[child]) {
-            parent[child] = vertex;
-            if(dfs(child)) return true;
-        }else if(color[child] == 1) {
-            st = child, en = vertex;
+ 
+bool dfs(int u) {
+    color[u] = 1;
+    for(auto v : adj[u]) {
+        if(!color[v]) {
+            parent[v] = u;
+            if(dfs(v)) return true;
+        }else if(color[v] == 1) {
+            st = v, en = u;
             return true;
         }
     }
-    color[vertex] = 2;
+    color[u] = 2;
     return false;
 }
 void checkCycle(int n) {
@@ -49,11 +53,9 @@ int main(){
     for(int i = 0; i < m; i++) {
         int u, v;
         cin >> u >> v;
-        G[u].push_back(v);
+        adj[u].push_back(v);
     }
     checkCycle(n);
   }
   return 0;
 }
-// https://cses.fi/problemset/task/1678/
-// https://codeforces.com/contest/1931/problem/F

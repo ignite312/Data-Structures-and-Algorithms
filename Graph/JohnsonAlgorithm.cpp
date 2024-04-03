@@ -1,3 +1,5 @@
+// https://www.spoj.com/problems/JHNSN/
+
 #include<bits/stdc++.h>
 using namespace std;
 #define ll long long
@@ -102,4 +104,3 @@ int main(){
   }
   return 0;
 }
-// https://www.spoj.com/problems/JHNSN/
