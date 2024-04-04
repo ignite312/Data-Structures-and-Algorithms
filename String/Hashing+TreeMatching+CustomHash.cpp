@@ -3,7 +3,6 @@ using namespace std;
 #define ll long long
 const int N = 1e6 + 1;
 
-/*Hashing*/
 int bigPow(ll base, ll power, const int mod) {
     int ans = 1 % mod;
     base %= mod;
@@ -54,7 +53,7 @@ struct Hashing {
     pair<int, int> get_hash() {return get_hash(1, n);}
 } h;
 
-/*Custom Hash For Unordered Map Pair*/
+// Custom Hash For Unordered Map Pair
 struct custom_hash {
     const int RANDOM = (ll)(make_unique<char>().get()) ^ chrono::high_resolution_clock::now()
                                                                     .time_since_epoch()

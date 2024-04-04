@@ -1,3 +1,11 @@
+/*
+Problem Name: Tree Matching
+Problem Link: https://cses.fi/problemset/task/1130
+Idea: Greedy, But Can be solved using Hopcroft–Karp algorithm
+Resource: https://en.wikipedia.org/wiki/Hopcroft–Karp_algorithm
+Resource: https://zobayer.blogspot.com/2010/05/maximum-matching.html
+*/
+
 #include<bits/stdc++.h>
 using namespace std;
 const int N = 2e5 + 1;
@@ -33,8 +41,3 @@ int main() {
     }
     return 0;
 }
-// https://cses.fi/problemset/task/1130/
-// Greedy method are used here
-// Can be solved using Hopcroft–Karp algorithm
-// https://en.wikipedia.org/wiki/Hopcroft–Karp_algorithm
-// implementation: https://zobayer.blogspot.com/2010/05/maximum-matching.html

@@ -1,3 +1,8 @@
+/*
+Problem Name: Distinct Colors
+Problem Link: https://cses.fi/problemset/task/1139
+Complexity: NLog(N)
+*/
 #include<bits/stdc++.h>
 using namespace std;
 const int N = 2e5 + 1;
@@ -14,7 +19,7 @@ void dfs(int u, int p) {
         if(v == p)continue;
         dfs(v, u);
         sz[u]+=sz[v];
-        if(H_C[u] == -1 || sz[H_C[u]] < sz[v]) {
+        if(H_C[u] == -1 || sz[v] > sz[H_C[u]]) {
             H_C[u] = v;
         }
     }
@@ -41,7 +46,7 @@ void dsu(int u, int p, int keep) {
     }
  
     for(auto v : adj[u]) {
-        if(v == p || v == H_C[u])continue;
+        if(v == p || v == H_C[u]) continue;
         for(int i = pos[v]; i < pos[v] + sz[v]; i++) {
             add(euler[i]);
         }
@@ -55,7 +60,7 @@ void dsu(int u, int p, int keep) {
         }
     }
 }
- 
+
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(0);
@@ -87,7 +92,3 @@ int main() {
     }
     return 0;
 }
-// https://cses.fi/problemset/task/1139/
-// https://codeforces.com/blog/entry/44351
-// Nlog(N) Solution
-// Don't use Map For Storing Color, Use Coordinate Compression

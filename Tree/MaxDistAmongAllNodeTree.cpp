@@ -1,28 +1,35 @@
+/*
+Problem Name: Tree Distances I
+Problem Link: https://cses.fi/problemset/task/1132
+Similar Problem: https://codeforces.com/contest/1822/problem/F
+*/
+
+// Not Well Optimized
 #include<bits/stdc++.h>
 using namespace std;
-const int N = 2e5+5;
-vector<int> G[N];
-int height[N], dist[N]; 
+const int N = 2e5+1;
+vector<int> adj[N+1];
+int height[N+1], dist[N+1]; 
  
-void dfs1(int vertex, int parent) {
-    for(auto child : G[vertex]) {
-        if(child == parent)continue;
-        dfs1(child, vertex);
-        height[vertex] = max(height[vertex], height[child] + 1);
+void dfs1(int u, int p) {
+    for(auto v : adj[u]) {
+        if(v == p)continue;
+        dfs1(v, u);
+        height[u] = max(height[u], height[v] + 1);
     }
 }
-void dfs2(int vertex, int parent) {
+void dfs2(int u, int p) {
     vector<int> ht;
-    for(auto child : G[vertex]) {
-        if(child == parent)continue;
-        ht.push_back(height[child]);
+    for(auto v : adj[u]) {
+        if(v == p)continue;
+        ht.push_back(height[v]);
     }
     sort(ht.rbegin(), ht.rend());
-    for(auto child : G[vertex]) {
-        if(child == parent)continue;
-        if(ht.size()  >= 2) dist[child] = max(dist[vertex]+1, (height[child] == ht[0] ? ht[1] : ht[0]) + 2);
-        else if(ht.size() == 1) dist[child] = dist[vertex] + 1;
-        dfs2(child, vertex);
+    for(auto v : adj[u]) {
+        if(v == p)continue;
+        if(ht.size()  >= 2) dist[v] = max(dist[u]+1, (height[v] == ht[0] ? ht[1] : ht[0]) + 2);
+        else if(ht.size() == 1) dist[v] = dist[u] + 1;
+        dfs2(v, u);
     }
 }
 int main() {
@@ -36,13 +43,11 @@ int main() {
     for(int i = 0; i < n - 1; i++) {
         int u, v;
         cin >> u >> v;
-        G[u].push_back(v);
-        G[v].push_back(u);
+        adj[u].push_back(v);
+        adj[v].push_back(u);
     }
     dfs1(1, -1);
     dfs2(1, -1);
     for(int i = 1; i <= n; i++)cout << max(height[i], dist[i]) << " ";
   }
 }
-// https://cses.fi/problemset/task/1132
-// https://codeforces.com/contest/1822/problem/F

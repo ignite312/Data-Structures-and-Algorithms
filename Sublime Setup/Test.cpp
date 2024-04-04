@@ -1,6 +1,7 @@
 #include<bits/stdc++.h>
 using namespace std;
-typedef long long ll;
+#define ll long long
+int N = 200000;
 
 int main() {
     ios::sync_with_stdio(false);
@@ -10,12 +11,12 @@ int main() {
     while(tt--) {
         int n;
         cin >> n;
-        vector<int> ele(n);
+        vector<int> v(n);
         for(int i = 0; i < n; i++) {
-            cin >> ele[i];
+            cin >> v[i];
         }
         for(int i = 0; i < n; i++) {
-            cout << ele[i] << " ";
+            cout << v[i] << " ";
         }
     }
 }

@@ -1,19 +1,21 @@
+/*
+Problem Name: Path Queries II
+Problem Link: https://cses.fi/problemset/task/2134
+Idea: Heavy Light Decomposition
+Complexity: O(Nlog^2N)
+*/
 #include<bits/stdc++.h>
 using namespace std;
 const int N = 2e5 + 1;
 int values[N+1], subtree[N+1], parent[N+1], depth[N+1];
 int heavy[N+1], head[N+1], id[N+1];
-vector<int> G[N+1];
+vector<int> adj[N+1];
  
+// 0 Base indexing
 struct Segtree {
     int size;
     vector<int> tree;
- 
-    void init(int n) {
-        size = 1;
-        while(size < n) size = size << 1;
-        tree.assign(2*size - 1, 0);
-    }
+
     int merge(int x, int y) {
         return max(x, y);
     }
@@ -26,9 +28,6 @@ struct Segtree {
         build(a, node*2+1, l, mid);
         build(a, node*2+2, mid+1, r);
         tree[node] = merge(tree[node*2+1], tree[node*2+2]);
-    }
-    void build(vector<int> &a) {
-        build(a, 0, 0, size-1);
     }
     void update(int i, int value, int node, int l, int r) {
         if(l == i && r == i) {
@@ -52,30 +51,42 @@ struct Segtree {
     int query(int i, int j) {
         return query(i, j, 0, 0, size-1);
     }
+    int sz(int n) {
+        int size = 1;
+        while(size < n) size = size << 1;
+        return 2*size-1;
+    }
+    void init(vector<int> &a, int n) {
+        size = 1;
+        while(size < n) size = size << 1;
+        tree.resize(2*size-1);
+        build(a, 0, 0, size-1);
+    }
 } st;
-void dfs(int node, int par) {
-  subtree[node] = 1;
+ 
+void dfs(int u, int p) {
+  subtree[u] = 1;
   int mx = 0;
-  for(auto child : G[node]) {
-    if(child == par)continue;
-    parent[child] = node;
-    depth[child] = depth[node]+1;
-    dfs(child, node);
-    subtree[child]+=subtree[node];
-    if(subtree[child] > mx) {
-      mx = subtree[child];
-      heavy[node] = child;
+  for(auto v : adj[u]) {
+    if(v == p)continue;
+    parent[v] = u;
+    depth[v] = depth[u]+1;
+    dfs(v, u);
+    subtree[v]+=subtree[u];
+    if(subtree[v] > mx) {
+      mx = subtree[v];
+      heavy[u] = v;
     }
   }
 }
-int idx;
-void HLD(int node, int h) {
-  head[node] = h;
-  id[node] = idx++;
-  if(heavy[node])HLD(heavy[node], h);
-  for(auto child : G[node]) {
-    if(child != parent[node] && child != heavy[node]) {
-      HLD(child, child);
+int idx = 0;
+void HLD(int u, int h) {
+  head[u] = h;
+  id[u] = idx++;
+  if(heavy[u])HLD(heavy[u], h);
+  for(auto v : adj[u]) {
+    if(v != parent[u] && v != heavy[u]) {
+      HLD(v, v);
     }
   }
 }
@@ -103,14 +114,14 @@ int main() {
         for(int i = 0; i < n-1; i++) {
           int u, v;
           cin >> u >> v;
-          G[u].push_back(v);
-          G[v].push_back(u);
+          adj[u].push_back(v);
+          adj[v].push_back(u);
         }
         dfs(1, -1);
         HLD(1, 1);
         vector<int> a(n);
         for(int i = 0; i < n; i++)a[id[i+1]] = values[i];
-        st.init(n), st.build(a);
+        st.init(a, n);
         while(q--) {
           int type;
           cin >> type;
@@ -127,4 +138,3 @@ int main() {
     }
     return 0;
 }
-// https://cses.fi/problemset/task/2134/

@@ -1,23 +1,26 @@
+/*
+Problem Name: Distinct Colors
+Problem Link: https://cses.fi/problemset/task/1139
+Complexity: NLog^2(N)
+*/
 #include<bits/stdc++.h>
 using namespace std;
 const int N = 2e5 + 1;
 int color[N+1], distinct[N+1];
 vector<int> adj[N+1];
-vector<set<int>> s(N+1);
  
-void dfs(int u, int p) {
-  s[u] = {color[u]};
+set<int> dfs(int u, int p) {
+  set<int> st_u = {color[u]};
   for (auto v: adj[u]) {
     if (v == p)  continue;
-    dfs(v, u);
-    if (s[u].size() < s[v].size()) {
-      s[u].swap(s[v]);
-    }
-    for (auto x: s[v]) {
-      s[u].insert(x);
+    set<int> st_v = dfs(v, u);
+    if(st_u.size() < st_v.size())swap(st_u, st_v);
+    for(auto x : st_v) {
+        st_u.insert(x);
     }
   }
-  distinct[u] = s[u].size();
+  distinct[u] = st_u.size();
+  return st_u;
 }
 int main() {
     ios::sync_with_stdio(false);
@@ -42,5 +45,3 @@ int main() {
     }
     return 0;
 }
-// https://cses.fi/problemset/task/1139/
-// Nlog^2(N) Solution

@@ -1,8 +1,14 @@
+/*
+Problem Name: Divisor Analysis
+Problem Link: https://cses.fi/problemset/task/2182/
+Resource: https://cp-algorithms.com/algebra/divisors.html
+Resource: https://blog.codechef.com/2009/08/17/tutorial-for-problem-product-of-divisors/
+*/
 #include<bits/stdc++.h>
 using namespace std;
 const int M = 1e9 + 7;
 #define ll long long
-
+ 
 int bigPow(ll base, ll power, const int mod) {
     int ans = 1 % mod;
     base %= mod;
@@ -14,17 +20,13 @@ int bigPow(ll base, ll power, const int mod) {
     }
     return ans;
 }
+// S_n = a(1-r^n)/(1-r)
 int geometricSeriesSum(int r, int n) {
-    int nu = bigPow(r, n, M) - 1;
-    int de = r - 1;
+    int nu = bigPow(r, n, M) - 1; // Numerator
+    int de = r - 1; // Denominator
     de = bigPow(de, M-2, M);
     return nu*1LL*de % M;
 }
-/*
-int arithmeticSeriesSum(int n) {
-    return (n*1LL*(n+1) % M)*bigPow(2, M-2, M) % M;
-}
-*/
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(0);
@@ -50,10 +52,10 @@ int main() {
                 pw = (pw * (k+1)) % (M-1);
             }
         }
+        // Product of divisors = (Num)^(d(Num)/2)
         if(!ok)prod = bigPow(num1, pw, M);
         else prod = bigPow(num2, pw, M);
         cout << cnt << " " << sum << " " << prod << "\n";
     }
     return 0;
 }
-// https://cses.fi/problemset/task/2182/

@@ -1,9 +1,16 @@
+/*
+Problem Name: Fibonacci Numbers
+Problem Link: https://cses.fi/problemset/task/1722/
+Resource: https://codeforces.com/blog/entry/14516
+*/
 #include<bits/stdc++.h>
 using namespace std;
 #define ll long long
 const int M = 1e9 + 7;
 map<ll, ll> dp;
 
+// f(2 * k) = f(k) * f(k) + f(k - 1) * f(k - 1)
+// f(2 * k + 1) = f(k) * f(k + 1) + f(k - 1) * f(k)
 ll f(ll n) {
     if(n == 0 || n == 1)return dp[n] = 1;
     if(dp[n])return dp[n];
@@ -24,5 +31,3 @@ int main() {
     }
     return 0;
 }
-// https://cses.fi/problemset/task/1722
-// https://codeforces.com/blog/entry/14516

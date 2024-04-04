@@ -1,8 +1,5 @@
 <snippet>
 	<content><![CDATA[
-#include<bits/stdc++.h>
-using namespace std;
-
 vector<string> permutation(string s) {
     sort(s.begin(), s.end());
     vector<string> ans;
@@ -21,6 +18,7 @@ vector<string> combination(int n, int k) {
     }
     return ans;
 }
+
 void combination2(vector<vector<int> >& ans,
     vector<int>& tmp, int n, int left, int k) {
     if (k == 0) {
@@ -39,24 +37,9 @@ vector<vector<int> > makeCombi(int n, int k) {
     combination2(ans, tmp, n, 1, k);
     return ans;
 }
-int main() {
-    ios::sync_with_stdio(false);
-    cin.tie(0);
-    int tt;
-    tt = 1;
-    while(tt--) {
-        vector<string> combinations = combination(8, 4);
-        for(auto ele : combinations){cout << ele << "\n";}
-            cout << "\n";
-
-        string s = "12345";
-        vector<string> permutations = permutation(s);
-        for(auto ele : permutations){cout << ele << "\n";}
-    }
-}
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
-	<tabTrigger>Permutation</tabTrigger>
+	<tabTrigger>PERMUTATION</tabTrigger>
 	<!-- Optional: Set a scope to limit where the snippet will trigger -->
 	<scope>source.c++</scope>
 </snippet>

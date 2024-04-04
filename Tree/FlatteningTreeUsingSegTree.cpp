@@ -1,69 +1,95 @@
+/*
+Problem Name: Path Queries
+Problem Link: https://cses.fi/problemset/task/1138
+Idea: Segment tree + Prefix Sum
+Resource: https://usaco.guide/plat/hld?lang=cpp
+*/
 #include<bits/stdc++.h>
 using namespace std;
 #define ll long long
-const int N = 2e5 + 5;
-vector<int> G[N+5];
-ll prefix[N+5], arr[N+5], values[N+5];
-int st[N+5], en[N+5];
+const int N = 2e5 + 1;
+vector<int> adj[N+1];
+ll prefix[N+1], values[N+1];
+int st[N+1], en[N+1];
 int Time = 0;
 
-
-ll lazy[N*4+5], tree[N*4+5];
-void build(int node, int l, int r) {
-    if(l == r) {
-        tree[node] = arr[l];
-        return;
+struct Segtree {
+    int n;
+    vector<ll> tree, lazy;
+ 
+    ll merge(ll x, ll y) {
+        return x + y;
     }
-    int mid = l + (r - l)/2;
-    build(node*2, l, mid);
-    build(node*2+1, mid+1, r);
-    tree[node] = tree[node*2] + tree[node*2+1];
-}
-void update(int node, int l, int r, int i, int j, ll value) {
-    if(lazy[node] != 0) {
-        tree[node] += (r-l+1)*lazy[node];
-        if(l != r) {
-            lazy[node*2]+=lazy[node];
-            lazy[node*2+1]+=lazy[node]; 
-        }
+    void push(int node, int l, int r) {
+        int a = node*2+1, b = node*2+2;
+        int mid = l + (r-l)/2;
+        tree[a]+=(mid-l+1)*lazy[node], tree[b]+=(r-(mid+1)+1)*lazy[node];
+        lazy[a]+=lazy[node], lazy[b]+=lazy[node];
         lazy[node] = 0;
     }
-    if(l > j || r < i)return;
-    if(l >= i && r <= j) {
-        tree[node] += (r-l+1)*value;
-        if(l != r) {
-            lazy[node*2]+= value;
-            lazy[node*2+1]+=value; 
+    void build(vector<ll> &a, int node, int l, int r) {
+        if(l == r) {
+            tree[node] = a[l];
+            return;
         }
-        return;
+        int mid = l + (r - l)/2;
+        build(a, node*2+1, l, mid);
+        build(a, node*2+2, mid+1, r);
+        tree[node] = merge(tree[node*2+1], tree[node*2+2]);
     }
-    int mid = l + (r - l)/2;
-    update(node*2, l, mid, i, j, value);
-    update(node*2+1, mid+1, r, i, j, value);
-    tree[node] = tree[node*2] + tree[node*2+1];
-}
-ll sum(int node, int l, int r, int i, int j) {
-    if(lazy[node] != 0) {
-        tree[node] += (r-l+1)*lazy[node];
-        if(l != r) {
-            lazy[node*2]+=lazy[node];
-            lazy[node*2+1]+=lazy[node]; 
+    void build(vector<ll> &a) {
+        build(a, 0, 0, n-1);
+    }
+    void update(int i, int j, ll value, int node, int l, int r) {
+        if(l > j || r < i)return;
+        if(l >= i && r <= j) {
+            lazy[node]+=value;
+            tree[node]+=(r-l+1)*value;
+            return;
         }
-        lazy[node] = 0;
+        if(lazy[node])push(node, l, r);
+        int mid = l + (r-l)/2;
+        update(i, j, value, node*2+1, l, mid);
+        update(i, j, value, node*2+2, mid+1, r);
+        tree[node] = merge(tree[node*2+1], tree[node*2+2]);
     }
-    if(l > j || r < i)return 0;
-    if(l >= i && r <= j) return tree[node];
-    int mid = l + (r - l)/2;
-    return sum(node*2, l, mid, i, j) + sum(node*2+1, mid+1, r, i, j);
-}
-void dfs(int vertex, int parent) {
-	st[vertex] = ++Time;
-	for(auto child : G[vertex]) {
-		if(child == parent)continue;
-		prefix[child]+=prefix[vertex];
-		dfs(child, vertex);
-	}
-	en[vertex] = Time;
+    void update(int i, int j, ll value) {
+        update(i, j, value, 0, 0, n-1);
+    }
+    ll query(int i, int j, int node, int l, int r) {
+        if(l > j || r < i)
+            return 0;
+        if(l >= i && r <= j)
+            return tree[node];
+ 
+        if(lazy[node]) push(node, l, r);
+        int mid = l + (r - l)/2;
+        return merge(query(i, j, node*2+1, l, mid), query(i, j, node*2+2, mid+1, r));
+    }
+    ll query(int i, int j) {
+        return query(i, j, 0, 0, n-1);
+    }
+    int sz(int n) {
+        int size = 1;
+        while(size < n) size = size << 1;
+        return 2*size-1;
+    }
+    void init(vector<ll> &a) {
+        n = a.size();
+        int _sz = sz(n);
+        tree.resize(_sz);
+        lazy.assign(_sz, 0);
+        build(a, 0, 0, n-1);
+    }
+} St;
+void dfs(int u, int p) {
+    st[u] = ++Time;
+    for(auto v : adj[u]) {
+        if(v == p)continue;
+        prefix[v]+=prefix[u];
+        dfs(v, u);
+    }
+    en[u] = Time;
 }
 int main() {
     ios::sync_with_stdio(false);
@@ -74,35 +100,35 @@ int main() {
     while(tt--) {
         int n, q;
         cin >> n >> q;
-        for(int i = 1; i<= n; i++) {
-        	cin >> prefix[i];
-        	values[i] = prefix[i];
+        for(int i = 1; i <= n; i++) {
+            cin >> prefix[i];
+            values[i] = prefix[i];
         }
         for(int i = 0; i < n-1; i++) {
-        	int u, v;
-        	cin >> u >> v;
-        	G[u].push_back(v);
-        	G[v].push_back(u);
+            int u, v;
+            cin >> u >> v;
+            adj[u].push_back(v);
+            adj[v].push_back(u);
         }
         dfs(1, -1);
-        for(int i = 1; i <= n; i++)arr[st[i]] = prefix[i];
-        build(1, 1, n);
+        vector<ll> v(Time);
+        for(int i = 1; i <= n; i++)v[st[i]-1] = prefix[i];
+        St.init(v);
         while(q--) {
-        	int type;
-        	cin >> type;
-        	if(type == 1) {
-        		int s;
-        		ll x;
-        		cin >> s >> x;
-        		update(1, 1, n, st[s], en[s], x - values[s]);
-        		values[s] = x;
-        	}else {
-        		int s;
-        		cin >> s;
-        		cout << sum(1, 1, n, st[s], st[s]) << "\n";
-        	}
+            int type;
+            cin >> type;
+            if(type == 1) {
+                int s;
+                ll x;
+                cin >> s >> x;
+                St.update(st[s]-1, en[s]-1, x - values[s]);
+                values[s] = x;
+            }else {
+                int s;
+                cin >> s;
+                cout << St.query(st[s]-1, st[s]-1) << "\n";
+            }
         }
     }
     return 0;
 }
-// https://cses.fi/problemset/task/1138

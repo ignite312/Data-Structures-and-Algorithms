@@ -1,6 +1,8 @@
 <snippet>
 	<content><![CDATA[
-/*O(Nlog(log(N)))*/
+vector<bool> is_prime(N+1, true);
+
+// O(Nlog(N))
 void divisors() {
     vector<vector<int>> d(N+1);
     for(int i = 1; i <= N; i++) {
@@ -9,7 +11,7 @@ void divisors() {
         }
     }
 }
-/*O(sqrt(N))*/
+// O(sqrt(N))
 vector<ll> divisor(ll a) {
     vector<ll> divisors;
     for (ll i = 1; i*i <= a; ++i) {
@@ -23,7 +25,7 @@ vector<ll> divisor(ll a) {
     }
     return divisors;
 }
-/*O(Nlog(log(N)))*/
+// O(Nlog(log(N)))
 void sieve() {
     is_prime[0] = is_prime[1] = false;
     for (int i = 2; i * i <= N; i++) {
@@ -33,7 +35,7 @@ void sieve() {
         }
     }
 }
-/*O(sqrt(N))*/
+// O(sqrt(N))
 vector<ll> prime_factorization(ll n) {
     vector<ll> factorization;
     while (n % 2 == 0) {

@@ -1,11 +1,12 @@
+/*
+Problem Name: Distinct Values Queries
+Problem Link: https://cses.fi/problemset/task/1734/
+Complexity:O((N+Q)sqrt(N))
+Resource: https://cp-algorithms.com/data_structures/sqrt_decomposition.html
+*/
 #include<bits/stdc++.h>
 using namespace std;
 const int N = 2e5 + 5;
-vector<int> G[N+5];
-int colors[N+5];
-int st[N+5], en[N+5];
-int Time = 0;
- 
 int arr[N+5], freq[N+5], distinct;
 const int rootN = 555;
  
@@ -35,6 +36,7 @@ void adjust(int &curr_l, int &curr_r, int L, int R) {
         curr_r--;
     }
 }
+
 void solve(vector<tuple<int, int, int>> &queries) {
     sort(queries.begin(), queries.end(), [&](const tuple<int, int, int>& a, const tuple<int, int, int>& b) {
         int blockA = get<0>(a) / rootN;
@@ -53,47 +55,33 @@ void solve(vector<tuple<int, int, int>> &queries) {
         adjust(curr_l, curr_r, L, R);
         ans[id] = distinct;
     }
-    for(auto ele : ans) cout << ele << " ";
+    for(auto ele : ans) cout << ele << "\n";
 }
-void dfs(int vertex, int parent) {
-	st[vertex] = ++Time;
-	for(auto child : G[vertex]) {
-		if(child == parent)continue;
-		dfs(child, vertex);
-	}
-	en[vertex] = Time;
-}
+ 
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(0);
     int tt;
     tt = 1;
-    // cin >> tt;
     while(tt--) {
-        int n;
-        cin >> n;
+        int n, q;
+        cin >> n >> q;
         map<int, int> compress;
         int current = 1;
         for(int i = 1; i <= n; i++) {
-            cin >> colors[i];
-            if(compress[colors[i]]) colors[i] = compress[colors[i]];
+            cin >> arr[i];
+            if(compress[arr[i]]) arr[i] = compress[arr[i]];
             else {
-                compress[colors[i]] = current++;
-                colors[i] = compress[colors[i]];
+                compress[arr[i]] = current++;
+                arr[i] = compress[arr[i]];
             }
         }
-        for(int i = 0; i < n-1; i++) {
-        	int u, v;
-        	cin >> u >> v;
-        	G[u].push_back(v);
-        	G[v].push_back(u);
-        }
-        dfs(1, -1);
-        for(int i = 1; i <= n; i++)arr[st[i]] = colors[i];
         vector<tuple<int, int, int>> queries;
-        for(int i = 1; i <= n; i++)queries.emplace_back(st[i], en[i], i-1);
+        for(int i = 0; i < q; i++) {
+            int l, r;
+            cin >> l >> r;
+            queries.emplace_back(l, r, i);
+        }
         solve(queries);
     }
-    return 0;
 }
-// https://cses.fi/problemset/task/1139/

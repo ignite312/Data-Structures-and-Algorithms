@@ -1,10 +1,10 @@
 #include<bits/stdc++.h>
 using namespace std;
 #define ll long long
-const int N = 1e5+1;
+const int N = 100000;
 vector<bool> is_prime(N+1, true);
 
-/*O(Nlog(log(N)))*/
+// O(Nlog(N))
 void divisors() {
     vector<vector<int>> d(N+1);
     for(int i = 1; i <= N; i++) {
@@ -13,7 +13,7 @@ void divisors() {
         }
     }
 }
-/*O(sqrt(N))*/
+// O(sqrt(N))
 vector<ll> divisor(ll a) {
     vector<ll> divisors;
     for (ll i = 1; i*i <= a; ++i) {
@@ -27,7 +27,7 @@ vector<ll> divisor(ll a) {
     }
     return divisors;
 }
-/*O(Nlog(log(N)))*/
+// O(Nlog(log(N)))
 void sieve() {
     is_prime[0] = is_prime[1] = false;
     for (int i = 2; i * i <= N; i++) {
@@ -37,7 +37,7 @@ void sieve() {
         }
     }
 }
-/*O(sqrt(N))*/
+// O(sqrt(N))
 vector<ll> prime_factorization(ll n) {
     vector<ll> factorization;
     while (n % 2 == 0) {
@@ -56,13 +56,6 @@ vector<ll> prime_factorization(ll n) {
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(0);
-    /*Counting Divisors Nlog(N)
-    for(int i = 1; i <= N; i++) {
-        for(int j = i; j <= N; j+=i) {
-            divisor[j]++;
-        }
-    }
-    */
     int tt;
     cin >> tt;
     while(tt--) {

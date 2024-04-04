@@ -5,9 +5,10 @@ const int N = 2e5 + 5;
 ll tree[N*4+5][4];
 vector<tuple<int, int, int>> ans;
  
+// Empty Subarray are not allowed allowed
 void build(vector<ll> &arr, int node, int l, int r) {
     if(l == r) {
-        tree[node][0] = tree[node][1] = tree[node][2] = arr[l]; /* max(0LL, arr[l]) for empty subarrray*/
+        tree[node][0] = tree[node][1] = tree[node][2] = arr[l];
         tree[node][3] = arr[l];
         return;
     }
@@ -22,7 +23,7 @@ void build(vector<ll> &arr, int node, int l, int r) {
 void update(int node, int l, int r, int i, ll new_value) {
     if(r < i || l > i)return;
     if(l == i && r == i) {
-        tree[node][0] = tree[node][1] = tree[node][2] = new_value; /* max(0LL, new_value) for empty subarray */
+        tree[node][0] = tree[node][1] = tree[node][2] = new_value;
         tree[node][3] = new_value;
         return;
     }
@@ -86,4 +87,3 @@ int main() {
     return 0;
 }
 // https://www.spoj.com/problems/GSS3/cstart=70
-// https://cses.fi/problemset/task/1190

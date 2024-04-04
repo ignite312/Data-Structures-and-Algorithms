@@ -1,11 +1,13 @@
 <snippet>
 	<content><![CDATA[
+// O(log(power))
 int bigMod(ll base, ll power, const int M) {
     if(power == 0)return 1;
     int p = bigMod(base, power/2, M) % M;
     if(power % 2 == 0)return p*1LL*p % M;
     return (p*1LL*p % M) * (base % M) % M;
 }
+// O(log(power))
 int bigPow(ll base, ll power, const int mod) {
     int ans = 1 % mod;
     base %= mod;
