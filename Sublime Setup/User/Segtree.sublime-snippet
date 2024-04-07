@@ -118,7 +118,6 @@ struct Segtree {
         build(a, 0, 0, n-1);
     }
 } st;
-*/
 ]]></content>
 	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
 	<tabTrigger>Seg</tabTrigger>

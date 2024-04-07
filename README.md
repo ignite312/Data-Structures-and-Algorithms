@@ -1,4 +1,4 @@
-## This repository contains some implementations of basic data structures and algorithms, code templates, snippets, and all the necessary stuff needed for competitive programming.
+This repository contains some implementations of basic data structures and algorithms, code templates, snippets, and all the necessary stuff needed for competitive programming.
 
 
 ## How to Setup Sublime Text?
