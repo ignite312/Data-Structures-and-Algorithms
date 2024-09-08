@@ -3,6 +3,7 @@ Problem Name: Company Queries II
 Problem Link: https://cses.fi/problemset/task/1688
 Resource: https://www.youtube.com/watch?v=dOAxrhAUIhA
 More Problem: https://www.spoj.com/problems/LCASQ/
+More Problem: https://codeforces.com/problemset/submission/2006/280369200
 */
 #include<bits/stdc++.h>
 using namespace std;
