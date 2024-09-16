@@ -1,7 +1,5 @@
 #include<bits/stdc++.h>
 using namespace std;
-#define ll long long
-int N = 200000;
 
 int main() {
     ios::sync_with_stdio(false);

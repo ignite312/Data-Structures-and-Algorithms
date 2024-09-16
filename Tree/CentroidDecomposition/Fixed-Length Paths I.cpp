@@ -3,15 +3,16 @@ Problem Name: Fixed-Length Paths I
 Problem Link: https://cses.fi/problemset/task/2080
 Idea: Centroid decomposition
 Complexity: O(Nlog(N))
+Resource:
 */
 #include<bits/stdc++.h>
 using namespace std;
 #define ll long long
 const int N = 2e5 + 1;
-vector<int> adj[N+1];
+vector<int> adj[N];
 int n, k;
-int subtree[N+1], cnt[N+1], mx_depth;
-bool visited[N+1];
+int subtree[N], cnt[N], mx_depth;
+bool visited[N];
 ll ans;
  
 int getSubtree(int u, int p) {
