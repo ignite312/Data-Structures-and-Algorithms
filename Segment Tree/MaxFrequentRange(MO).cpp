@@ -1,9 +1,9 @@
 // https://codeforces.com/contest/2009/problem/G1
-// 1-base indexing
 #include<bits/stdc++.h>
 using namespace std;
 
-const int N = 2e5 + 1;
+// 0-base indexing
+const int N = 200000;
 int a[N], freq[N], maxFreq;
 map<int, int> freqCount;
 
@@ -49,14 +49,15 @@ void adjust(int &curr_l, int &curr_r, int L, int R) {
         curr_r--;
     }
 }
-void solve(vector<tuple<int, int, int>> &queries, int k) {
-    const int BLOCK_SIZE = sqrt(queries.size()) + 1;
-    sort(queries.begin(), queries.end(), [&](const tuple<int, int, int>& a, const tuple<int, int, int>& b) {
-        int blockA = get<0>(a) / BLOCK_SIZE;
-        int blockB = get<0>(b) / BLOCK_SIZE;
+void solve(vector<array<int, 3>> &queries, int k) {
+    // const int BLOCK_SIZE = sqrt(queries.size()) + 1;
+    const int BLOCK_SIZE = 555;
+    sort(queries.begin(), queries.end(), [&](const array<int, 3>& a, const array<int, 3>& b) {
+        int blockA = a[0] / BLOCK_SIZE;
+        int blockB = b[0] / BLOCK_SIZE;
         if (blockA != blockB)
             return blockA < blockB;
-        return get<1>(a) < get<1>(b);
+        return a[1] < b[1];
     });
 
     auto[L, R, id] = queries[0];
@@ -64,13 +65,13 @@ void solve(vector<tuple<int, int, int>> &queries, int k) {
     maxFreq = 1;
     freq[a[curr_l]]++;
     freqCount[1] = 1;
-    vector<int> ans(queries.size() + 1);
+    vector<int> ans(queries.size());
 
     for(auto [L, R, id] : queries) {
         adjust(curr_l, curr_r, L, R);
         ans[id] = maxFreq;
     }
-    for(int i = 1; i < ans.size(); i++) cout << k - ans[i] << "\n";
+    for(auto x : ans) cout << k - x << "\n";
 }
 int main() {
     ios::sync_with_stdio(false);
@@ -79,31 +80,33 @@ int main() {
     tt = 1;
     cin >> tt;
     while(tt--) {
+        maxFreq = 0;
+        freqCount.clear();
+
         int n, k, q;
         cin >> n >> k >> q;
         for(int i = 0; i <= n; i++) {
             a[i] = freq[i] = 0;
         }
-        maxFreq = 0;
-        freqCount.clear();
-        for(int i = 1; i <= n; i++) {
+        for(int i = 0; i < n; i++) {
             cin >> a[i];
             a[i] -= i;
         }
         map<int, int> compress;
-        int current = 1;
-        for(int i = 1; i <= n; i++) {
-            if(compress[a[i]]) a[i] = compress[a[i]];
+        int id = 0;
+        for(int i = 0; i < n; i++) {
+            if(compress.find(a[i]) != compress.end()) a[i] = compress[a[i]];
             else {
-                compress[a[i]] = current++;
+                compress[a[i]] = id++;
                 a[i] = compress[a[i]];
             }
         }
-        vector<tuple<int, int, int>> queries;
-        for(int i = 1; i <= q; i++) {
-            int L, R;
-            cin >> L >> R;
-            queries.push_back({L, R, i});
+        vector<array<int, 3>> queries;
+        for(int i = 0; i < q; i++) {
+            int l, r;
+            cin >> l >> r;
+            --l, --r;
+            queries.push_back({l, r, i});
         }
         solve(queries, k);
     }
