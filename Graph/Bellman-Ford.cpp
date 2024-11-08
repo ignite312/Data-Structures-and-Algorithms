@@ -45,3 +45,14 @@ int main() {
     }
     return 0;
 }
+/*
+Example where the Bellman-Ford algorithm works with negative weights.
+7 7
+1 2 2
+1 3 1000
+3 4 1000
+4 5 1000
+5 2 -5000
+2 6 1
+6 7 1
+*/

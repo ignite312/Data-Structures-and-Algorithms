@@ -20,7 +20,6 @@ void backtrack(vector<vector<int>>& all_LIS, vector<int>& current_LIS, const vec
     }
     current_LIS.pop_back();
 }
-
 vector<vector<int>> find_all_LIS(const vector<int>& A) {
     int N = A.size();
     vector<int> LIS_length(N, 1);
@@ -42,7 +41,6 @@ vector<vector<int>> find_all_LIS(const vector<int>& A) {
         }
         max_length = max(max_length, LIS_length[i]);
     }
-
     // Find all LIS by backtracking from indices with maximum LIS length
     vector<vector<int>> all_LIS;
     vector<int> current_LIS;

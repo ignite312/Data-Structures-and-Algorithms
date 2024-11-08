@@ -1,5 +1,6 @@
 #include<bits/stdc++.h>
 using namespace std;
+#define ll long long 
 
 vector<string> permutation(string s) {
     sort(s.begin(), s.end());
@@ -19,7 +20,6 @@ vector<string> combination(int n, int k) {
     }
     return ans;
 }
-
 void combination2(vector<vector<int> >& ans,
     vector<int>& tmp, int n, int left, int k) {
     if (k == 0) {
@@ -38,6 +38,27 @@ vector<vector<int> > makeCombi(int n, int k) {
     combination2(ans, tmp, n, 1, k);
     return ans;
 }
+ll nPr(int n, int r) {
+    if (r < 0 || r > n) {
+        return 0;
+    }
+    ll result = 1;
+    for (int i = 0; i < r; ++i) {
+        result *= n--;
+    }
+    return result;
+}
+ll nCr(int n, int r) {
+    if (r < 0 || r > n) {
+        return 0;
+    }
+    ll result = 1;
+    for(int i = 1; i <= r; ++i) {
+        result *= n--;
+        result /= i;
+    }
+    return result;
+}
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(0);
@@ -52,4 +73,5 @@ int main() {
         vector<string> permutations = permutation(s);
         for(auto ele : permutations){cout << ele << "\n";}
     }
+    return 0;
 }

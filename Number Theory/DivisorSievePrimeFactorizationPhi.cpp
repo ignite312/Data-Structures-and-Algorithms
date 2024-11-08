@@ -53,7 +53,7 @@ vector<ll> prime_factorization(ll n) {
     if (n > 1) factorization.push_back(n);
     return factorization;
 }
-// O(sqrt(n))
+// O(sqrt(N))
 int phi(int n) {
     int result = n;
     for (int i = 2; i * i <= n; i++) {
@@ -67,7 +67,7 @@ int phi(int n) {
         result -= result / n;
     return result;
 }
-// O(nloglog(n))
+// O(Nloglog(N))
 void phi_1_to_n(int n) {
     vector<int> phi(n + 1);
     for (int i = 0; i <= n; i++)
@@ -80,7 +80,7 @@ void phi_1_to_n(int n) {
         }
     }
 }
-// O(nloglog(n))
+// O(Nloglog(N))
 void phi_1_to_n_(int n) {
     vector<int> phi(n + 1);
     phi[0] = 0;
