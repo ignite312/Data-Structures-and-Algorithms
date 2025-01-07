@@ -1,0 +1,30 @@
+<snippet>
+	<content><![CDATA[
+// Function to convert binary to decimal
+int binaryToDecimal(const string& binary) {
+    int decimal = 0;
+    int length = binary.length();
+    for (int i = 0; i < length; ++i) {
+        if (binary[length - i - 1] == '1') {
+            decimal += pow(2, i);
+        }
+    }
+    return decimal;
+}
+
+// Function to convert decimal to binary
+string decimalToBinary(int decimal) {
+    string binary = "";
+    if (decimal == 0) return "0";
+    while (decimal > 0) {
+        binary = to_string(decimal % 2) + binary;
+        decimal /= 2;
+    }
+    return binary;
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>BIN</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<scope>source.c++</scope>
+</snippet>
