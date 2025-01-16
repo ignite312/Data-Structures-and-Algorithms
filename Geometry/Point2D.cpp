@@ -46,6 +46,9 @@ struct P {
     bool operator != (P a) const { return !(*this == a); }
     bool operator < (P a) const { return sign(a.x - x) == 0 ? y < a.y : x < a.x; }
     bool operator > (P a) const { return sign(a.x - x) == 0 ? y > a.y : x > a.x; }
+    P perp() const {
+        return P(y, -x); // Or P(y, -x) depending on the desired direction.
+    }
 };
 
 P operator*(ftype a, P b) {return b * a;}
@@ -140,6 +143,21 @@ void ConvexHull(vector<P> &points, int n) {
     for(auto p : hull) {
         cout << p.x << " " << p.y << "\n";
     }
+}
+bool circleInter(P a, P b, double r1, double r2, pair<P, P>* out) {
+    P vec = b - a;
+    double d2 = norm(vec);
+    double d = sqrt(d2);
+    if (d > r1 + r2 || d < fabs(r1 - r2)) {
+        return false;
+    }
+    double p = (d2 + r1 * r1 - r2 * r2) / (2 * d);
+    double h2 = r1 * r1 - p * p;
+    if (h2 < 0) h2 = 0;
+    P mid = a + vec * (p / d);
+    P per = vec.perp() * (sqrt(h2) / d);
+    *out = {mid + per, mid - per};
+    return true;
 }
 int main() {
     ios::sync_with_stdio(false);
