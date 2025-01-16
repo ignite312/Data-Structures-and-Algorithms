@@ -122,7 +122,7 @@ struct Segtree {
 ```
 ## Sparse Table O(1)query
 ```C++
-struct ST {
+struct RMQ {
     // 0-base indexing
   int n, logN;
   vector<vector<int>> st;
