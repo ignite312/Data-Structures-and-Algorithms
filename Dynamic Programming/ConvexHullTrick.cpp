@@ -4,6 +4,7 @@ Problem Link: https://atcoder.jp/contests/dp/tasks/dp_z
 Idea: Convex Hull Trick
 Complexity:
 Resource: https://codeforces.com/blog/entry/63823
+Resource: https://www.youtube.com/watch?v=u-kNMIVNbjo
 */
 #include<bits/stdc++.h>
 using namespace std;
