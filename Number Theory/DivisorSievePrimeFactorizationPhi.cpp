@@ -92,6 +92,30 @@ void phi_1_to_n_(int n) {
         for (int j = 2 * i; j <= n; j += i)
               phi[j] -= phi[i];
 }
+//O(Nlog(logN))
+void computeSPF() {
+    iota(spf, spf + N, 0);
+    for (int i = 2; i < N; i++) { // i*i will work
+        if (spf[i] == i) {
+            for (int j = 2*i; j < N; j += i) {
+                if (spf[j] == j) {
+                    spf[j] = i;
+                }
+            }
+        }
+    }
+}
+//O(Nlog(logN))
+void computeGPF() {
+    iota(gpf, gpf + N, 0);
+    for (int i = 2; i < N; i++) { // N = 30, gpf[28] i*i will not work
+        if (gpf[i] == i) {
+            for (int j = 2*i; j < N; j += i) {
+                gpf[j] = i;
+            }
+        }
+    }
+}
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(0);
