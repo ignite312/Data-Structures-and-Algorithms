@@ -1,4 +1,7 @@
 // https://codeforces.com/gym/105327/problem/K
+// Prac:
+// https://cses.fi/problemset/task/1745/
+// https://codeforces.com/contest/687/problem/C
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -7,7 +10,7 @@ set<int> isSubsetSum(vector<int> &a, int n, int target) {
     vector<vector<int>> dp(n+1, vector<int> (target+1, false));
     dp[0][0] = true;
     for (int i = 1; i <= n; i++) {
-        for (int sum = 1; sum <= target; sum++) {
+        for (int sum = 0; sum <= target; sum++) {
               dp[i][sum] = dp[i - 1][sum];
               if(sum >= a[i])dp[i][sum] |= dp[i - 1][sum - a[i]];
         }
