@@ -1,3 +1,4 @@
+// https://codeforces.com/gym/105884/problem/C
 #include<bits/stdc++.h>
 using namespace std;
 #define ll long long
@@ -47,8 +48,9 @@ bool pointInTriangle(P a, P b, P c, P p) {
     ftype s3 = cross(a - c, p - c);
     return (s1 > 0 && s2 > 0 && s3 > 0) || (s1 < 0 && s2 < 0 && s3 < 0);
 }
-vector<P> ConvexHull(vector<P> &points, int n) {
-    vector<P> hull;
+vector<P> ConvexHull(const vector<P> &_points, int n) {
+    vector<P> hull, points;
+    points = _points;
     sort(points.begin(), points.end());
     for(int rep = 0; rep < 2; rep++) {
         const int h = (int)hull.size();
@@ -78,7 +80,7 @@ int main() {
         int n;
         cin >> n;
         vector<P> points;
-        vector<pair<P, int>> idx;
+        map<P, int> id;
         for(int i = 0; i < n; i++) {
             P p;
             int x, y;
@@ -86,30 +88,27 @@ int main() {
             p.x = x;
             p.y = y;
             points.push_back(p);
-            idx.push_back({p, i+1});
+            id[p] = i+1;
         }
         auto hull = ConvexHull(points, n);
         if(hull.size() == n) {
           cout << "-1\n"; 
           continue;
         }
-        set<P> hullSet(hull.begin(), hull.end());
+        map<P, bool> check;
+        for(auto p : hull) {
+          check[p] = true;
+        }
         int m = hull.size();
-        for(auto [p, id] : idx) {
-          if(hullSet.count(p) == 0) {
+        for(auto p : points) {
+          if(!check[p]) {
             bool ok = true;
             for(int i = 0; i < m && ok; i++) {
               for(int j = 0; j < m; j++) {
                 int l = j, r = (j + 1) % m;
                 if(i == l || i == r)continue;
                 if(pointInTriangle(hull[i], hull[l], hull[r], p)) {
-                  int id1, id2, id3;
-                  for(auto [_p, _id] : idx) {
-                    if(_p == hull[i]) id1 = _id;
-                    if(_p == hull[l]) id2 = _id;
-                    if(_p == hull[r]) id3 = _id;
-                  }
-                  cout << id << " " << id1 << " " << id2 << " " << id3 << "\n";
+                  cout << id[p] << " " << id[hull[i]] << " " << id[hull[l]] << " " << id[hull[r]] << "\n";
                   ok = false;
                   break;
                 }

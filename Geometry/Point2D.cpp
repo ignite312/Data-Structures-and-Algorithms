@@ -104,9 +104,9 @@ string PointInPolygon(vector<P> &polygon, int n, P &p) {
     if(cnt & 1)return "INSIDE";
     return "OUTSIDE";
 }
-
-void ConvexHull(vector<P> &points, int n) {
-    vector<P> hull;
+void ConvexHull(const vector<P> &_points, int n) {
+    vector<P> hull, points;
+    points = _points;
     sort(points.begin(), points.end());
     for(int rep = 0; rep < 2; rep++) {
         const int h = (int)hull.size();
@@ -126,8 +126,9 @@ void ConvexHull(vector<P> &points, int n) {
     }
     cout << hull.size() << "\n";
     for(auto p : hull) {
-        cout << p.x << " " << p.y << "\n";
+      cout << p.x << " " << p.y << "\n";
     }
+    return;
 }
 bool circleInter(P a, P b, double r1, double r2, pair<P, P>* out) {
     P vec = b - a;
@@ -148,7 +149,7 @@ bool pointInsideTriangle(P a, P b, P c, P p) {
     ftype s1 = cross(b - a, p - a);
     ftype s2 = cross(c - b, p - b);
     ftype s3 = cross(a - c, p - c);
-    return (s1 > 0 && s2 > 0 && s3 > 0) || (s1 < 0 && s2 < 0 && s3 < 0);
+    return (s1 > 0 && s2 > 0 && s3 > 0) || (s1 < 0 && s2 < 0 && s3 < 0); // >= or <= boundary included 
 }
 int main() {
     ios::sync_with_stdio(false);
