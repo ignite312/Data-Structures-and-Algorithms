@@ -18,37 +18,22 @@ struct P {
     void read() {
         cin >> x >> y;
     }
-    P& operator+=(const P &t) {
-        x += t.x;
-        y += t.y;
-        return *this;
-    }
-    P& operator-=(const P &t) {
-        x -= t.x;
-        y -= t.y;
-        return *this;
-    }
-    P& operator*=(ftype t) {
-        x *= t;
-        y *= t;
-        return *this;
-    }
-    P& operator/=(ftype t) {
-        x /= t;
-        y /= t;
-        return *this;
-    }
-    P operator+(const P &t) const {return P(*this) += t;}
-    P operator-(const P &t) const {return P(*this) -= t;}
-    P operator*(ftype t) const {return P(*this) *= t;}
-    P operator/(ftype t) const {return P(*this) /= t;}
+
+    P& operator+=(const P &t) { x += t.x; y += t.y; return *this; }
+    P& operator-=(const P &t) { x -= t.x; y -= t.y; return *this; }
+    P& operator*=(ftype t) { x *= t; y *= t; return *this; }
+    P& operator/=(ftype t) { x /= t; y /= t; return *this; }
+
+    P operator+(const P &t) const { return P(*this) += t; }
+    P operator-(const P &t) const { return P(*this) -= t; }
+    P operator*(ftype t) const { return P(*this) *= t; }
+    P operator/(ftype t) const { return P(*this) /= t; }
+
     bool operator == (P a) const { return sign(a.x - x) == 0 && sign(a.y - y) == 0; }
     bool operator != (P a) const { return !(*this == a); }
     bool operator < (P a) const { return sign(a.x - x) == 0 ? y < a.y : x < a.x; }
     bool operator > (P a) const { return sign(a.x - x) == 0 ? y > a.y : x > a.x; }
-    P perp() const {
-        return P(y, -x); // Or P(y, -x) depending on the desired direction.
-    }
+    P perp() const { return P(y, -x); } // 90° rotation clockwise Or P(y, -x) depending on the desired direction.
 };
 
 P operator*(ftype a, P b) {return b * a;}
