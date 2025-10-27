@@ -144,6 +144,12 @@ bool circleInter(P a, P b, double r1, double r2, pair<P, P>* out) {
     *out = {mid + per, mid - per};
     return true;
 }
+bool pointInsideTriangle(P a, P b, P c, P p) {
+    ftype s1 = cross(b - a, p - a);
+    ftype s2 = cross(c - b, p - b);
+    ftype s3 = cross(a - c, p - c);
+    return (s1 > 0 && s2 > 0 && s3 > 0) || (s1 < 0 && s2 < 0 && s3 < 0);
+}
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(0);
