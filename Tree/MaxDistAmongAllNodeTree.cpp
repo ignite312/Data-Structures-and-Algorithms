@@ -8,6 +8,7 @@ More Problem: https://codeforces.com/contest/1187/problem/E
 More Problem: https://atcoder.jp/contests/dp/tasks/dp_v
 More Problem: https://codeforces.com/contest/1822/problem/F
 More Problem: https://atcoder.jp/contests/abc368/submissions/57074317
+More Problem: https://cses.fi/problemset/result/7249879/
 */
 #include<bits/stdc++.h>
 using namespace std;
