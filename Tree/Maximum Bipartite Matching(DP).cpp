@@ -9,7 +9,8 @@ using namespace std;
 const int N = 2e5 + 1;
 vector<int> adj[N+1];
 int dp[N+1][2];
- 
+// dp[u][0] = Maximum matching size in the subtree rooted at u if u is not matched with any of its children
+// dp[u][1] = Maximum matching size in the subtree rooted at u if u is matched with exactly one of its children
 void dfs(int u, int p) {
     for(auto v : adj[u]) {
         if(v == p)continue;
