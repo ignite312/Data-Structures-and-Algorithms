@@ -27,7 +27,7 @@ struct Segtree {
   }
   void update(int idx, int l, int r, int pos, ll val) {
     if (l == r) {
-      tree[idx] += val;
+      tree[idx] = val; // increment or set
       return;
     }
     int mid = (l + r) / 2;
@@ -70,7 +70,7 @@ int main() {
         ll x;
         cin >> s >> x;
         --s;
-        st.update(s, x - a[s]);
+        st.update(s, x);
         a[s] = x;
       } else {
         int l, r;
