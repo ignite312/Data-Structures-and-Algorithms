@@ -7,10 +7,10 @@ More Problem: https://codeforces.com/problemset/submission/2006/280369200
 */
 #include<bits/stdc++.h>
 using namespace std;
-const int N = 2e5 + 1;
+const int N = 200001;
 const int LOG = 18; // LOG = ceil(log2(N))
-vector<int> adj[N+1];
-int up[N+5][LOG], depth[N+5]; // up[v][j] is the 2^j-th Anchestor of node v
+vector<int> adj[N];
+int up[N][LOG], depth[N]; // up[v][j] is the 2^j-th Anchestor of node v
  
 void ancestor(int u) {
     for(auto v : adj[u]) {

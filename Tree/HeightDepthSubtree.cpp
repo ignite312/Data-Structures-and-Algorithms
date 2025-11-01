@@ -1,12 +1,13 @@
 #include <bits/stdc++.h>
 using namespace std;
-const int N = 200000;
-vector<int> G[N+1], depth(N+1), height(N+1), subtree(N+1);
+const int N = 200001;
+vector<int> adj[N];
+int depth[N], height[N], subtree[N];
 bool vis[N];
 
 void dfs(int u, int p) {
     subtree[u] = 1;
-    for(auto v : G[u]) {
+    for(auto v : adj[u]) {
         if(v == p)continue;
         depth[v] = depth[u] + 1;
         dfs(v, u);
@@ -26,8 +27,8 @@ int main() {
         for (int i = 0; i < n - 1; ++i) {
             int u, v;
             cin >> u >> v;
-            G[u].push_back(v);
-            G[v].push_back(u);
+            adj[u].push_back(v);
+            adj[v].push_back(u);
         } 
         dfs(1, -1);
         for (int i = 1; i <= n; ++i)

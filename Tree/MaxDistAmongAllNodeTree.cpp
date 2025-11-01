@@ -1,9 +1,7 @@
 /*
 Problem Name: Tree Distances I
 Problem Link: https://cses.fi/problemset/task/1132
-Idea: 
-Complexity: 
-Resource:
+Idea:Tree Re-rooting 
 More Problem: https://codeforces.com/contest/1187/problem/E
 More Problem: https://atcoder.jp/contests/dp/tasks/dp_v
 More Problem: https://codeforces.com/contest/1822/problem/F

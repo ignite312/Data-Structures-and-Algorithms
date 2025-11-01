@@ -5,9 +5,9 @@ Similar Problem: https://codeforces.com/contest/1881/problem/F
 */
 #include<bits/stdc++.h>
 using namespace std;
-const int N = 2e5+1;
-vector<int> adj[N+1];
-int depth[N+1];
+const int N = 200001;
+vector<int> adj[N];
+int depth[N];
  
 void dfs(int u, int p) {
     for(auto v : adj[u]) {
