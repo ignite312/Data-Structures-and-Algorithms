@@ -1,20 +1,27 @@
+// https://codeforces.com/gym/105873/problem/I
 #include <bits/stdc++.h>
 #include <ext/pb_ds/assoc_container.hpp>
 #include <ext/pb_ds/tree_policy.hpp>
 using namespace std;
 using namespace __gnu_pbds;
 
-template <class type1>
-using ordered_multiset = tree <type1, null_type, less_equal <type1>, rb_tree_tag, tree_order_statistics_node_update>;
+template <class T>
+using ordered_multiset = tree<
+    T,
+    null_type,
+    less_equal<T>,
+    rb_tree_tag,
+    tree_order_statistics_node_update
+>;
 
 const int N = 1e5 + 1;
-int topic[N+1];
-vector<int> adj[N+1];
-vector<ordered_multiset <int>> s(N+1);
+int topic[N];
+vector<int> adj[N];
+vector<ordered_multiset <int>> s(N);
 int n, k;
 map<int, vector<pair<int, int>>> mp;
 map<pair<int, int>, int> id;
-int ans[N+1];
+int ans[N];
  
 void dfs(int u, int p) {
   s[u].insert(topic[u]);

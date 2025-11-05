@@ -30,7 +30,6 @@ using ordered_pair_set = tree<
     rb_tree_tag,
     tree_order_statistics_node_update
 >;
-
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(0);
