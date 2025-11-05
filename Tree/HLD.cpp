@@ -59,7 +59,7 @@ struct Segtree {
 };
 /*
 struct Segtree {
-    0-base indexing
+    0-based array indexing
     int n;
     vector<int> t;
     Segtree(int n = 0) : n(n), t(4*n, 0) {}

@@ -14,9 +14,9 @@ set<int> primes;
 // O(Nlog(log(N)))
 void sieve() {
     is_prime[0] = is_prime[1] = false;
-    for (int i = 2; i * i <= N; i++) {
+    for (int i = 2; i * i < N; i++) {
         if (is_prime[i]) {
-            for (int j = i * i; j <= N; j += i)
+            for (int j = i * i; j < N; j += i)
                 is_prime[j] = false;
         }
     }
@@ -42,10 +42,9 @@ void compute(int u, int p, bool filling, int depth) {
     mx_depth = max(mx_depth, depth);
     if(filling) {
         cnt[depth]++;
-        all_cnt[depth]++;
     }else {
         // ans+=cnt[k - depth]*1LL;
-        for(int i = 1; i <= mx_depth; i++) {
+        for(int i = 0; i <= mx_depth; i++) {
             if(cnt[i])all_cnt[i + depth]+=cnt[i];
         }
     }

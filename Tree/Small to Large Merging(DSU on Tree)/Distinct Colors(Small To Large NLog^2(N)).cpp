@@ -6,21 +6,23 @@ Complexity: NLog^2(N)
 #include<bits/stdc++.h>
 using namespace std;
 const int N = 2e5 + 1;
-int color[N+1], distinct[N+1];
-vector<int> adj[N+1];
+int color[N], distinct[N];
+vector<int> adj[N];
+vector<set<int>> s(N);
  
-set<int> dfs(int u, int p) {
-  set<int> st_u = {color[u]};
+void dfs(int u, int p) {
+  s[u] = {color[u]};
   for (auto v: adj[u]) {
     if (v == p)  continue;
-    set<int> st_v = dfs(v, u);
-    if(st_u.size() < st_v.size())swap(st_u, st_v);
-    for(auto x : st_v) {
-        st_u.insert(x);
+    dfs(v, u);
+    if (s[u].size() < s[v].size()) {
+      s[u].swap(s[v]);
+    }
+    for (auto x: s[v]) {
+      s[u].insert(x);
     }
   }
-  distinct[u] = st_u.size();
-  return st_u;
+  distinct[u] = s[u].size();
 }
 int main() {
     ios::sync_with_stdio(false);
