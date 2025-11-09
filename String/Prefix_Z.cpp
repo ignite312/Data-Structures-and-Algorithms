@@ -1,14 +1,13 @@
 /*
 Problem Name: String Functions
 Problem Link: https://cses.fi/problemset/task/2107/
-Idea:
-Complexity:
-Resource:
+Practice Problem: https://codeforces.com/contest/126/problem/B
 */
 #include<bits/stdc++.h>
 using namespace std;
 
-// https://cp-algorithms.com/string/prefix-function.html
+// pi[i] = the length of the longest proper prefix of the substring
+// s[0 ... i] which is also a suffix of this substring.
 vector<int> prefix_function(string s) {
     int n = (int)s.length();
     vector<int> pi(n);
@@ -22,8 +21,8 @@ vector<int> prefix_function(string s) {
     }
     return pi;
 }
-
-// https://cp-algorithms.com/string/z-function.html
+// z[i] = length of the longest substring starting at position i that matches the prefix of s.
+// z[0] = 0
 vector<int> z_function(string s) {
     int n = s.size();
     vector<int> z(n);
@@ -42,7 +41,6 @@ vector<int> z_function(string s) {
     }
     return z;
 }
-
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(0);
