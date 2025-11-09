@@ -8,7 +8,7 @@ Practice Problem: https://codeforces.com/contest/126/problem/B
 using namespace std;
 
 // pi[i] = the length of the longest proper prefix of the substring
-// s[0 ... i] which is also a suffix of this substring.
+// s[0 ... i] which is also a suffix of this substring, TC: O(n)
 vector<int> prefix_function(string s) {
   int n = (int)s.length();
   vector<int> pi(n);
@@ -23,7 +23,7 @@ vector<int> prefix_function(string s) {
   return pi;
 }
 // z[i] = length of the longest substring starting at position i that matches the prefix of s.
-// z[0] = 0
+// z[0] = 0, TC: O(n)
 vector<int> z_function(string s) {
   int n = s.size();
   vector<int> z(n);
