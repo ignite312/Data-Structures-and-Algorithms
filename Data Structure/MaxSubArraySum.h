@@ -12,7 +12,6 @@ ll maxSubArraySum(vector<ll> v, ll n) {
 // Non-empty Subarray
 ll maxSubArraySum(vector<ll> v, ll n) {
     ll sum = v[0], mx = v[0];
- 
     for (int i = 1; i < n; i++) {
         sum = max(sum+v[i], v[i]);
         mx = max(mx, sum);

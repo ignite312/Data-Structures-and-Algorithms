@@ -87,6 +87,17 @@ void display(struct Trie* root, string word) {
     if(is_leaf(root))cout << word << "\n";
     for(int i = 0; i < 26; i++)if(root->child[i])display(root->child[i], word + (char)(i + 'a'));
 }*/
+/*
+void isWordPfxOfOther(struct Trie* root, bool &ok) {
+    for(int i = 0; i < 10; i++)if(root->child[i]) {
+        if(root->child[i]->word_cnt && root->child[i]->pfx_cnt > 1) {
+            ok = false;
+            return;
+        }
+        isWordPfxOfOther(root->child[i]);
+    }
+}
+*/
 const int N = 100001;
 const int mod = 1e9 + 7;
 int dp[N];
