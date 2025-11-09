@@ -2,7 +2,6 @@
 #include <bits/stdc++.h>
 using namespace std;
 #define ll long long
-const int N = 200001;
 
 struct Segtree {
   // 0-based array indexing
@@ -12,6 +11,9 @@ struct Segtree {
     this->n = n;
     tree.assign(4 * n, 0);
   }
+  ll merge(ll x, ll y) { // Associative: SUM\MIN\MAX\GCD\LCM\OR\AND\XOR
+    return x + y;
+  }
   void build(vector<ll> &a, int idx, int l, int r) {
     if (l == r) {
       tree[idx] = a[l];
@@ -20,7 +22,7 @@ struct Segtree {
     int mid = (l + r) / 2;
     build(a, idx * 2, l, mid);
     build(a, idx * 2 + 1, mid + 1, r);
-    tree[idx] = tree[idx * 2] + tree[idx * 2 + 1];
+    tree[idx] = merge(tree[idx * 2], tree[idx * 2 + 1]);
   }
   void build(vector<ll> &a) {
     build(a, 1, 0, n - 1);
@@ -33,17 +35,17 @@ struct Segtree {
     int mid = (l + r) / 2;
     if (pos <= mid) update(idx * 2, l, mid, pos, val);
     else update(idx * 2 + 1, mid + 1, r, pos, val);
-    tree[idx] = tree[idx * 2] + tree[idx * 2 + 1];
+    tree[idx] = merge(tree[idx * 2], tree[idx * 2 + 1]);
   }
   void update(int pos, ll val) {
     update(1, 0, n - 1, pos, val);
   }
   ll query(int idx, int l, int r, int ql, int qr) {
-    if (l > qr || r < ql) return 0;
+    if (l > qr || r < ql) return 0; // identity
     if (ql <= l && r <= qr) return tree[idx];
     int mid = (l + r) / 2;
-    return query(idx * 2, l, mid, ql, qr) +
-           query(idx * 2 + 1, mid + 1, r, ql, qr);
+    return merge(query(idx * 2, l, mid, ql, qr),
+           query(idx * 2 + 1, mid + 1, r, ql, qr));
   }
   ll query(int l, int r) {
     return query(1, 0, n - 1, l, r);

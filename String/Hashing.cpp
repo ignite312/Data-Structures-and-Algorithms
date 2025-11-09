@@ -54,8 +54,7 @@ struct Hashing {
     return get(1, n);
   }
 };
-bool isPalindrome(Hashing & H, Hashing & RH, int l, int r, int n) {
-  // 1-based
+bool isPalindrome(Hashing & H, Hashing & RH, int l, int r, int n) { // 1-based
   return H.get(l, r) == RH.get(n - r + 1, n - l + 1);
 }
 

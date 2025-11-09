@@ -4,7 +4,7 @@ using namespace std;
 #define ll long long
 
 struct Segtree {
-  // 0-base array indexing
+  // 0-based array indexing
   int n;
   vector<ll> tree, lazy;
 
