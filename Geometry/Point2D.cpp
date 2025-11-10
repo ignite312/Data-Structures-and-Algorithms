@@ -84,7 +84,6 @@ ftype PolygonArea(vector<P> &polygon, int n) {
     }
     return abs(area);
 }
-
 string PointInPolygon(vector<P> &polygon, int n, P &p) {
     int cnt = 0;
     for(int i = 0; i < n; i++) {
@@ -103,6 +102,27 @@ string PointInPolygon(vector<P> &polygon, int n, P &p) {
     }
     if(cnt & 1)return "INSIDE";
     return "OUTSIDE";
+}
+bool circleInter(P a, P b, double r1, double r2, pair<P, P>* out) {
+    P vec = b - a;
+    double d2 = norm(vec);
+    double d = sqrt(d2);
+    if (d > r1 + r2 || d < fabs(r1 - r2)) {
+        return false;
+    }
+    double p = (d2 + r1 * r1 - r2 * r2) / (2 * d);
+    double h2 = r1 * r1 - p * p;
+    if (h2 < 0) h2 = 0;
+    P mid = a + vec * (p / d);
+    P per = vec.perp() * (sqrt(h2) / d);
+    *out = {mid + per, mid - per};
+    return true;
+}
+bool pointInsideTriangle(P a, P b, P c, P p) {
+    ftype s1 = cross(b - a, p - a);
+    ftype s2 = cross(c - b, p - b);
+    ftype s3 = cross(a - c, p - c);
+    return (s1 > 0 && s2 > 0 && s3 > 0) || (s1 < 0 && s2 < 0 && s3 < 0); // >= or <= boundary included 
 }
 void ConvexHull(const vector<P> &_points, int n) {
     vector<P> hull, points;
@@ -129,27 +149,6 @@ void ConvexHull(const vector<P> &_points, int n) {
       cout << p.x << " " << p.y << "\n";
     }
     return;
-}
-bool circleInter(P a, P b, double r1, double r2, pair<P, P>* out) {
-    P vec = b - a;
-    double d2 = norm(vec);
-    double d = sqrt(d2);
-    if (d > r1 + r2 || d < fabs(r1 - r2)) {
-        return false;
-    }
-    double p = (d2 + r1 * r1 - r2 * r2) / (2 * d);
-    double h2 = r1 * r1 - p * p;
-    if (h2 < 0) h2 = 0;
-    P mid = a + vec * (p / d);
-    P per = vec.perp() * (sqrt(h2) / d);
-    *out = {mid + per, mid - per};
-    return true;
-}
-bool pointInsideTriangle(P a, P b, P c, P p) {
-    ftype s1 = cross(b - a, p - a);
-    ftype s2 = cross(c - b, p - b);
-    ftype s3 = cross(a - c, p - c);
-    return (s1 > 0 && s2 > 0 && s3 > 0) || (s1 < 0 && s2 < 0 && s3 < 0); // >= or <= boundary included 
 }
 int main() {
     ios::sync_with_stdio(false);
