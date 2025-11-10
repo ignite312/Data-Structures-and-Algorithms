@@ -3,6 +3,8 @@
 using namespace std;
 #define ll long long
 
+// The subarray contains at most k distinct values.
+// The subarray length is at most mxlength.
 ll distAtMostK(vector<int> &v, int k, int mxlength) {
     int n = v.size();
     int dist = 0;
@@ -10,9 +12,7 @@ ll distAtMostK(vector<int> &v, int k, int mxlength) {
     ll ans = 0;
     map<int, int> mp;
     for(int r = 0; r < n; r++) {
-        if(++mp[v[r]] == 1) {
-            dist++;
-        }
+        if(++mp[v[r]] == 1) { dist++; }
         while(dist > k || (r-l+1) > mxlength) {
             if(--mp[v[l]] == 0)dist--;
             l++;

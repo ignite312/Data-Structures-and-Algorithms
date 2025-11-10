@@ -4,36 +4,20 @@ using namespace std;
 int inversion_count = 0;
 
 void merge(vector<int> &v, int l, int r, int mid) {
-    int l_sz = mid - l + 1;
-    int r_sz = r - (mid + 1) + 1;
-    int L[l_sz], R[r_sz];
-    for(int i = 0; i < l_sz; i++)L[i] = v[i+l];
-    for(int i = 0; i < r_sz; i++)R[i] = v[i+mid+1];
-    int l_i = 0, r_i = 0;
-    
-    for(int i = l; i <= r && l_i < l_sz && r_i < r_sz; i++) {
-        if(L[l_i] <= R[r_i])l_i++;
-        else if(L[l_i] > R[r_i]){
-            inversion_count+=(l_sz-1)-l_i+1;
-            r_i++;
+    vector<int> L(v.begin() + l, v.begin() + mid + 1);
+    vector<int> R(v.begin() + mid + 1, v.begin() + r + 1);
+    int i = 0, j = 0, k = l;
+    int l_sz = L.size();
+    while(i < L.size() && j < R.size()) {
+        if(L[i] <= R[j]) {
+            v[k++] = L[i++];
+        } else {
+            v[k++] = R[j++];
+            inversion_count += (l_sz - i); 
         }
     }
-    l_i = 0, r_i = 0;
-    for(int i = l; i <= r; i++) {
-        if(r_i == r_sz) {
-            v[i] = L[l_i];
-            l_i++;
-        }else if(l_i == l_sz) {
-            v[i] = R[r_i];
-            r_i++;
-        }else if(L[l_i] <= R[r_i]) {
-            v[i] = L[l_i];
-            l_i++;
-        }else {
-            v[i] = R[r_i];
-            r_i++;
-        }
-    }
+    while(i < L.size()) v[k++] = L[i++];
+    while(j < R.size()) v[k++] = R[j++];
 }
 // 0-base indexing
 void mergeSort(vector<int> &v, int l, int r) {

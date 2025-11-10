@@ -1,3 +1,4 @@
+// https://codeforces.com/gym/105873/problem/I
 #include <bits/stdc++.h>
 #include <ext/pb_ds/assoc_container.hpp>
 #include <ext/pb_ds/tree_policy.hpp>
@@ -12,21 +13,11 @@ using ordered_set = tree<
     rb_tree_tag,
     tree_order_statistics_node_update
 >;
-
 template <class T>
 using ordered_multiset = tree<
     T,
     null_type,
     less_equal<T>,
-    rb_tree_tag,
-    tree_order_statistics_node_update
->;
-
-template <class T1, class T2>
-using ordered_pair_set = tree<
-    pair<T1, T2>,
-    null_type,
-    less<pair<T1, T2>>,
     rb_tree_tag,
     tree_order_statistics_node_update
 >;
@@ -49,8 +40,6 @@ int main() {
         }
         cout << *os.find_by_order(1) << "\n"; // find by index
         cout << os.order_of_key(6) << "\n"; // count total number less than
-
-        os.erase(3);
     }
     return 0;
 }
