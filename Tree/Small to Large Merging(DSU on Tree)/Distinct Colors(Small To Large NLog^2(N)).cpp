@@ -1,6 +1,7 @@
 /*
 Problem Name: Distinct Colors
 Problem Link: https://cses.fi/problemset/task/1139
+Another Problem: https://codeforces.com/contest/1923/problem/E
 Complexity: NLog^2(N)
 */
 #include<bits/stdc++.h>
