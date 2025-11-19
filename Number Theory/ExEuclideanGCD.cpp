@@ -15,7 +15,7 @@ int ExEuclideanGCD(int a, int b, int& x, int& y) {
     y = x1 - y1 * (a / b);
     return d;
 }
-// O(logm)
+// O(log(m))
 int modInverse(int a, int m) { // finding a^-1, m can be prime or non-prime
     int m0 = m, y = 0, x = 1;
     if (m == 1) return 0;

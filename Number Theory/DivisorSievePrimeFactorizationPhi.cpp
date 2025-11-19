@@ -1,14 +1,14 @@
 #include<bits/stdc++.h>
 using namespace std;
 #define ll long long
-const int N = 100000;
-vector<bool> is_prime(N+1, true);
+const int N = 100001;
+vector<bool> is_prime(N, true);
 
 // O(Nlog(N))
 void divisors() {
     vector<vector<int>> d(N+1);
-    for(int i = 1; i <= N; i++) {
-        for(int j = i; j <= N; j+=i) {
+    for(int i = 1; i < N; i++) {
+        for(int j = i; j < N; j+=i) {
             d[j].push_back(i);
         }
     }
@@ -30,9 +30,9 @@ vector<ll> divisor(ll a) {
 // O(Nlog(log(N)))
 void sieve() {
     is_prime[0] = is_prime[1] = false;
-    for (int i = 2; i * i <= N; i++) {
+    for (int i = 2; i * i < N; i++) {
         if (is_prime[i]) {
-            for (int j = i * i; j <= N; j += i)
+            for (int j = i * i; j < N; j += i)
                 is_prime[j] = false;
         }
     }
@@ -65,6 +65,19 @@ int phi(int n) {
     }
     if (n > 1)
         result -= result / n;
+    return result;
+}
+// O(sqrt(N))/log(N)
+ll phi(ll n) {
+    ll result = n;
+    for (ll p : primes) {
+        if (p * p > n) break;
+        if (n % p == 0) {
+            while (n % p == 0) n /= p;
+            result -= result / p;
+        }
+    }
+    if (n > 1) result -= result/n;
     return result;
 }
 // O(Nloglog(N))

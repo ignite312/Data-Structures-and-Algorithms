@@ -7,13 +7,12 @@ Resource: https://usaco.guide/adv/eulerian-tours?lang=cpp
 */
 #include<bits/stdc++.h>
 using namespace std;
-const int N = 100000;
-vector<pair<int, int>> adj[N+1];
-int degree[N+1];
-bool visited[2*N+1]; // total edge size
-vector<int> euler_path;
- 
- 
+const int N = 100001;
+vector<pair<int, int>> adj[N];
+int degree[N];
+bool visited[2*N]; // total edge size
+vector<int> euler_trail;
+
 void dfs(int u) {
     while(!adj[u].empty()) {
         auto [v, idx] = adj[u].back();
@@ -22,7 +21,7 @@ void dfs(int u) {
         visited[idx] = true;
         dfs(v);
     }
-    euler_path.push_back(u);
+    euler_trail.push_back(u);
 }
 int main() {
     ios::sync_with_stdio(false);
@@ -43,7 +42,7 @@ int main() {
         /*
         Undirected Graphs:
         Euler Circuit: All vertices must have even degree.
-        Euler Path: Exactly zero or two vertices can have odd degree.
+        Euler Trail: Exactly zero or two vertices can have odd degree.
         */
         for(int i = 1; i <= n; i++) {
             if(degree[i] % 2 != 0) {
@@ -52,11 +51,11 @@ int main() {
             }
         }
         dfs(1);
-        if(euler_path.size() !=  m+1) {
+        if(euler_trail.size() !=  m+1) {
             cout << "IMPOSSIBLE\n";
             return 0;
         }
-        for(auto x : euler_path) {cout << x << " ";}
+        for(auto x : euler_trail) {cout << x << " ";}
     }
     return 0;
 }

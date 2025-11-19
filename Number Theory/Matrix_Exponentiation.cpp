@@ -18,7 +18,6 @@ struct Matrix {
         return product;
     }
 };
-
 Matrix expo_power(Matrix a, ll k) {
     Matrix product;
     for (int i = 0; i < 2; i++) {

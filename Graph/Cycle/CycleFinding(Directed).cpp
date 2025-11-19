@@ -4,9 +4,9 @@ Problem Link: https://cses.fi/problemset/task/1678/
 */
 #include<bits/stdc++.h>
 using namespace std;
-const int N = 100000;
-vector<int> adj[N+1], parent(N+1);
-vector<int> color(N+1);
+const int N = 100001;
+vector<int> adj[N], parent(N);
+vector<int> color(N);
 int st, en;
  
 bool dfs(int u) {

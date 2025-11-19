@@ -4,10 +4,10 @@ Problem Link: https://cses.fi/problemset/task/1668/
 */
 #include<bits/stdc++.h>
 using namespace std;
-const int N = 100000;
-vector<int> adj[N+1];
-bool vis[N+1], is_bipartite = true;
-int color[N+1];
+const int N = 100001;
+vector<int> adj[N];
+bool vis[N], is_bipartite = true;
+int color[N];
  
 void dfs(int u) {
     vis[u] = true;

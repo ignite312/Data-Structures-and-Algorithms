@@ -16,7 +16,6 @@ int lis(int n, vector<int> &a) {
     for(int i = 1; i <= n; i++)if(d[i] < INF)ans = i;
     return ans;
 }
-
 // Cp-Algo Complexity: O(n^2)
 vector<int> lis(vector<int> const& a) {
     int n = a.size();
@@ -44,7 +43,6 @@ vector<int> lis(vector<int> const& a) {
     reverse(sq.begin(), sq.end());
     return sq;
 }
-
 // Complexity: O(n^2)
 int lisTopDown(int idx, int last_idx, int n, vector<int> &a) {
     if(idx == n)return 0;
@@ -59,18 +57,6 @@ int lisTopDown(int idx, int last_idx, int n, vector<int> &a) {
 int lisRecursion(int n, vector<int> &a) {
     memset(dp, -1, sizeof(dp));
     return lisTopDown(0, -1, n, a);
-}
-
-// Complexity: O(n^2)
-int lisBottomUp(int n, vector<int> &a) {
-    vector<int> d(n, 1); // d[i] = maximum length of lis end here
-    for(int i = 0; i < n; i++)
-        for(int j = 0; j < i; j++)
-            if(a[j] < a[i])
-                d[i] = max(d[i], d[j]+1);
-    int ans = 1;
-    for(int i = 0; i < n; i++) ans = max(ans, d[i]);
-    return ans;
 }
 int main() {
     ios::sync_with_stdio(false);

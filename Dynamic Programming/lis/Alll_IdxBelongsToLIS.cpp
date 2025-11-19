@@ -18,7 +18,6 @@ vector<int> lis(int n, vector<int> &a) {
     for(int i = 1; i <= n; i++)if(d[i] < INF)mx = i;
     return max_end;
 }
-
 vector<int> lds(int n, vector<int> &a) {
     for(int i = 0; i < n; i++)a[i]*=-1;
     vector<int> d(n+1, INF), max_end(n);

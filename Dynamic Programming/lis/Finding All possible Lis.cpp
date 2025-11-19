@@ -6,19 +6,19 @@ Complexity: O(n^2)
 using namespace std;
 int n;
 
-void backtrack(vector<vector<int>>& all_LIS, vector<int>& current_LIS, const vector<int>& A, const vector<vector<int>>& prev, int current_index) {
-    current_LIS.push_back(current_index);
-    if (prev[current_index].empty()) {
+void backtrack(vector<vector<int>>& all_LIS, vector<int>& cur_lis, const vector<int>& A, const vector<vector<int>>& prev, int current_idx) {
+    cur_lis.push_back(current_idx);
+    if (prev[current_idx].empty()) {
         // Reverse the current LIS since we are backtracking
-        vector<int> temp_LIS = current_LIS;
-        reverse(temp_LIS.begin(), temp_LIS.end());
-        all_LIS.push_back(temp_LIS);
+        vector<int> tmp_lis = cur_lis;
+        reverse(tmp_lis.begin(), tmp_lis.end());
+        all_LIS.push_back(tmp_lis);
     } else {
-        for (int prev_index : prev[current_index]) {
-            backtrack(all_LIS, current_LIS, A, prev, prev_index);
+        for (int prev_idx : prev[current_idx]) {
+            backtrack(all_LIS, cur_lis, A, prev, prev_idx);
         }
     }
-    current_LIS.pop_back();
+    cur_lis.pop_back();
 }
 vector<vector<int>> find_all_LIS(const vector<int>& A) {
     int N = A.size();
@@ -43,16 +43,14 @@ vector<vector<int>> find_all_LIS(const vector<int>& A) {
     }
     // Find all LIS by backtracking from indices with maximum LIS length
     vector<vector<int>> all_LIS;
-    vector<int> current_LIS;
+    vector<int> cur_lis;
     for (int i = 0; i < N; ++i) {
         if (LIS_length[i] == max_length) {
-            backtrack(all_LIS, current_LIS, A, prev, i);
+            backtrack(all_LIS, cur_lis, A, prev, i);
         }
     }
-
     return all_LIS;
 }
-
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(0);
@@ -69,8 +67,8 @@ int main() {
         vector<vector<int>> all_LIS = find_all_LIS(v);
         set<int> st;
         for (const auto& lis : all_LIS) {
-            for (int index : lis) {
-                st.insert(index+1);
+            for (int idx : lis) {
+                st.insert(idx+1);
             }
         }
         cout << st.size() << "\n";

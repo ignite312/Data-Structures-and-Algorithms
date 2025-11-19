@@ -4,10 +4,10 @@ Problem Link: https://cses.fi/problemset/task/1669/
 */
 #include <bits/stdc++.h>
 using namespace std;
-const int N = 100000;
-vector<int> adj[N + 1];
-bool vis[N + 1], cycle_found;
-int parent[N + 1], en, st;
+const int N = 100001;
+vector<int> adj[N];
+bool vis[N], cycle_found;
+int parent[N], en, st;
 
 void dfs(int u, int p) {
     vis[u] = true;
@@ -26,7 +26,6 @@ void dfs(int u, int p) {
         }
     }
 }
-
 void checkCycle(int n) {
     for (int i = 1; i <= n; i++) {
         if (!vis[i]) {
@@ -38,15 +37,11 @@ void checkCycle(int n) {
         cout << "IMPOSSIBLE\n";
         return;
     }
-    vector<int> path;
-    path.push_back(st);
-    path.push_back(en);
-    int j = en;
-    while (parent[j] != st) {
+    vector<int> path = {st, en};
+    for (int j = en; parent[j] != st; j = parent[j])
         path.push_back(parent[j]);
-        j = parent[j];
-    }
     path.push_back(st);
+
     cout << path.size() << "\n";
     for (int i = path.size() - 1; i >= 0; i--)
         cout << path[i] << " ";

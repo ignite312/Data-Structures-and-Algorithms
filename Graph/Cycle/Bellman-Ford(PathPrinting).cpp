@@ -1,5 +1,4 @@
-// https://codeforces.com/contest/20/submission/220888074
-
+// https://codeforces.com/contest/20/problem/C
 // This implementation will give TLE just to confirm that out algorithm are working perfectly
 #include<bits/stdc++.h>
 using namespace std;

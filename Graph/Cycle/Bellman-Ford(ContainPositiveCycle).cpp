@@ -6,11 +6,11 @@ Problem Link: https://cses.fi/problemset/task/1673/
 using namespace std;
 #define ll long long
 const ll INF = LLONG_MAX;
-const int N = 2500;
+const int N = 2501;
 vector<tuple<int, int, ll>> edges;
-bool mark[N+1], vis[N+1];
-vector<int> adj[N+1];
-vector<ll> d(N+1, -INF);
+bool mark[N], vis[N];
+vector<int> adj[N];
+vector<ll> d(N, -INF);
  
 void BellmanFord(int s, int n) {
     d[s] = 0;

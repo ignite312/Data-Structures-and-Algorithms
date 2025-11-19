@@ -2,14 +2,13 @@
 Problem Name: Police Chase
 Problem Link: https://cses.fi/problemset/task/1695/
 Idea: Max-flow min-cut
-Complexity:
 Resource: https://cp-algorithms.com/graph/edmonds_karp.html
 */
 #include<bits/stdc++.h>
 using namespace std;
-const int N = 500;
-vector<int> adj[N+1];
-int capacity[N+1][N+1];
+const int N = 501;
+vector<int> adj[N];
+int capacity[N][N];
  
 int bfs(int s, int d, int n, vector<int> &parent) {
     parent.assign(n+1, -1);

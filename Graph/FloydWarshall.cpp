@@ -1,16 +1,15 @@
 /*
 Problem Name: Shortest Routes II
 Problem Link: https://cses.fi/problemset/task/1672/
-// https://codeforces.com/contest/295/submission/309110350
+// Prac: https://codeforces.com/contest/295/problem/B
 */
 #include<bits/stdc++.h>
 using namespace std;
 #define ll long long 
-const int N = 500;
+const int N = 501;
 const ll INF = LLONG_MAX;
-ll d[N+1][N+1];
+ll d[N][N];
 int n, m;
- 
 void init() {
     for(int i = 0; i < n; i++) {
         for(int j = 0; j < n; j++) {

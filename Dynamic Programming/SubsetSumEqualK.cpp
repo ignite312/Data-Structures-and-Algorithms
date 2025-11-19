@@ -1,7 +1,6 @@
 // https://codeforces.com/gym/105327/problem/K
-// Prac:
-// https://cses.fi/problemset/task/1745/
-// https://codeforces.com/contest/687/problem/C
+// Prac: https://cses.fi/problemset/task/1745/
+// Prac: https://codeforces.com/contest/687/problem/C
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -26,7 +25,6 @@ set<int> isSubsetSum(vector<int> &a, int n, int target) {
     }
     return indices;
 }
-
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(0);

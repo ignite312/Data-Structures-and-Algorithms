@@ -1,16 +1,16 @@
 /*
 Problem Name: Teleporters Path
 Problem Link: https://cses.fi/problemset/task/1693/
-Idea: Euler Path in Directed graph (Hierholzer’s Algorithm)
+Idea: Euler Trail in Directed graph (Hierholzer’s Algorithm)
 Complexity: O(E)
 Resource: https://usaco.guide/adv/eulerian-tours?lang=cpp
 */
 #include<bits/stdc++.h>
 using namespace std;
-const int N = 100000;
-vector<int> adj[N+1];
-int in[N+1], out[N+1];
-vector<int> euler_path;
+const int N = 100001;
+vector<int> adj[N];
+int in[N], out[N];
+vector<int> euler_trail;
  
 void dfs(int u) {
     while(!adj[u].empty()) {
@@ -18,7 +18,7 @@ void dfs(int u) {
         adj[u].pop_back();
         dfs(v);
     }
-    euler_path.push_back(u);
+    euler_trail.push_back(u);
 }
 int main() {
     ios::sync_with_stdio(false);
@@ -38,7 +38,7 @@ int main() {
         /*
         Directed Graphs:
         Euler Circuit: All vertices must have equal in-degree and out-degree.
-        Euler Path: Exactly two vertices can have a difference of one between their in-degree and out-degree.
+        Euler Trail: Exactly two vertices can have a difference of one between their in-degree and out-degree.
         */
         for(int i = 1; i <= n; i++) {
             if((i == 1 && out[1]-in[1] != 1) || 
@@ -49,12 +49,12 @@ int main() {
             }
         }
         dfs(1);
-        reverse(euler_path.begin(), euler_path.end());
-        if(euler_path.size() - 1 !=  m || euler_path.back() != n) {
+        reverse(euler_trail.begin(), euler_trail.end());
+        if(euler_trail.size() - 1 !=  m || euler_trail.back() != n) {
             cout << "IMPOSSIBLE\n";
             return 0;
         }
-        for(auto x : euler_path) {cout << x << " ";}
+        for(auto x : euler_trail) {cout << x << " ";}
     }
     return 0;
 }

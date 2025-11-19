@@ -4,7 +4,6 @@ AC: https://codeforces.com/contest/1929/submission/248276098
 dp[u][0] =  The number of possible ways so that the subtree rooted at node u has no pairs with a ancestor-descendant relationships.
 dp[u][1] =  The number of possible ways so that the subtree rooted at node u has exactly one ancestor-descendant relationship.
 */
-
 #include<bits/stdc++.h>
 using namespace std;
 #define ll long long

@@ -1,5 +1,3 @@
-## Geometric and Arithmetic series sum
-```C++
 // S_n = a(1-r^n)/(1-r)
 int geometricSeriesSum(int r, int n) {
     int nu = bigPow(r, n, M) - 1; // Numerator
@@ -12,4 +10,3 @@ int geometricSeriesSum(int r, int n) {
 int arithmeticSeriesSum(int n) {
     return (n*1LL*(n+1) % M)*bigPow(2, M-2, M) % M;
 }
-```

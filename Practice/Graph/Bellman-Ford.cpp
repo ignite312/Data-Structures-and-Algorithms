@@ -2,7 +2,6 @@
 Problem Name: Shortest Routes I
 Problem Link: https://cses.fi/problemset/task/1671/
 */
-
 // This implementation will give TLE just to confirm that out algorithm are working perfectly
 #include<bits/stdc++.h>
 using namespace std;
