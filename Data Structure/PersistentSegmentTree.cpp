@@ -2,6 +2,7 @@
 Problem Name: Range Queries and Copies
 Problem Link: https://cses.fi/problemset/task/1737/
 Resource: https://www.youtube.com/watch?v=mLlaIj_8lv0
+Prac: https://codeforces.com/gym/106208/problem/B
 */
 #include<bits/stdc++.h>
 
