@@ -1,6 +1,6 @@
 #include<bits/stdc++.h>
 using namespace std;
-const int N = 1001;
+const int N = 501;
 const int INF = INT_MAX;
 int dp[N][N];
 
@@ -16,7 +16,7 @@ int lis(int n, vector<int> &a) {
     for(int i = 1; i <= n; i++)if(d[i] < INF)ans = i;
     return ans;
 }
-// Cp-Algo Complexity: O(n^2)
+// Complexity: O(n^2)
 vector<int> lis(vector<int> const& a) {
     int n = a.size();
     vector<int> d(n, 1), p(n, -1);
