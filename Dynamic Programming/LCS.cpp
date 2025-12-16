@@ -5,11 +5,11 @@ const int N = 51;
 int dp[N][N][N];
 
 int lcsRec(string &s1, string &s2, string &s3, int m, int n, int o) {
-    if (m == 0 || n == 0 || o == 0)
+    if(m == 0 || n == 0 || o == 0)
         return 0;
-    if (dp[m][n][o] != -1)
+    if(dp[m][n][o] != -1)
         return dp[m][n][o];
-    if (s1[m - 1] == s2[n - 1] && s1[m-1] == s3[o-1])
+    if(s1[m - 1] == s2[n - 1] && s1[m-1] == s3[o-1])
         return dp[m][n][o] = 1 + lcsRec(s1, s2, s3, m - 1, n - 1, o-1);
     int ret = INT_MIN;
     for(int i = -1; i < 1; i++) {
