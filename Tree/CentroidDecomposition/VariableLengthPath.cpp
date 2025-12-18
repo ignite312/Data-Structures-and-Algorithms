@@ -1,4 +1,5 @@
 // https://www.codechef.com/problems/PRIMEDST
+// It counts all the number of paths of length 1 to k
 #include<bits/stdc++.h>
 using namespace std;
 #define ll long long

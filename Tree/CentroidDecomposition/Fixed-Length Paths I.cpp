@@ -1,5 +1,6 @@
 /*
 Problem Name: Fixed-Length Paths I
+It counts all the number of paths of length k in a tree.
 Problem Link: https://cses.fi/problemset/task/2080
 Idea: Centroid decomposition
 Complexity: O(Nlog(N))

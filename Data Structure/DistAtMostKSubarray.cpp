@@ -34,6 +34,7 @@ int main() {
         for(int i = 0; i < n; i++) {
             cin >> v[i];
         }
+        // Find total boundary l <= boundary size <= r and exactly k distinct element
         cout << (distAtMostK(v, k, r) - distAtMostK(v, k, l-1)) - 
          (distAtMostK(v, k-1, r) - distAtMostK(v, k-1, l-1)) << "\n";
     }

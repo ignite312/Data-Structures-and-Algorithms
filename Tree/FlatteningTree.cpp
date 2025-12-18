@@ -1,5 +1,7 @@
 /*
 Problem Name: Path Queries
+1. change the value of node s to x
+2. calculate the sum of values on the path from the root to node s
 Problem Link: https://cses.fi/problemset/task/1138
 Idea: Segment tree + Prefix Sum
 Complexity:

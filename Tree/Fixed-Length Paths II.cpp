@@ -1,5 +1,6 @@
 /*
 Problem Name: Fixed-Length Paths II
+Given a tree of n nodes, your task is to count the number of distinct paths that have at least k1 and at most k2 edges.
 Problem Link: https://cses.fi/problemset/task/2081
 Idea: Small To Large Technique
 Resource: https://github.com/ignite312/CpStuff/tree/main/Tree/Small%20to%20Large%20Merging(DSU%20on%20Tree)
