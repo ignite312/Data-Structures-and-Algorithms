@@ -4,6 +4,7 @@ using namespace std;
 #define ll long long
 int n, m, k;
 
+// 0-based indexing
 void update(vector<vector<ll>>& grid, int x1, int y1, int x2, int y2, int val) {
     grid[x1][y1] += val;
     if (x2 + 1 < n) grid[x2 + 1][y1] -= val;

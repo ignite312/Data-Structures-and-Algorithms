@@ -39,7 +39,8 @@ struct Matrix {
     return a;
   }
 };
-template<class T> struct SubMatrix {
+template<class T> 
+struct SubMatrix {
   // 0-based indexing
   vector<vector<T>> p;
   SubMatrix(const vector<vector<T>>& v) {
@@ -103,6 +104,16 @@ int main() {
                 cout << exp_result.d[i][j] << " ";
             cout << "\n";
         }
+
+        // Submatrix
+        vector<vector<int>> v = {
+          {1, 2, 3},
+          {4, 5, 6},
+          {7, 8, 9}
+        };
+        // Create a SubMatrix object
+        SubMatrix<int> sm(v);
+        cout << sm.sum(0, 0, 1, 1);
     }
     return 0;
 }

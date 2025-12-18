@@ -1,6 +1,7 @@
 /*
 https://codeforces.com/contest/2002/problem/D1
 Checking a permutation is valid dfs order or not
+Prac: https://codeforces.com/contest/2002/problem/D2
 */
 #include <bits/stdc++.h>
 using namespace std;

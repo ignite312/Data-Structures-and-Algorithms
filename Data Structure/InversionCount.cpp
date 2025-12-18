@@ -19,7 +19,7 @@ void merge(vector<int> &v, int l, int r, int mid) {
     while(i < L.size()) v[k++] = L[i++];
     while(j < R.size()) v[k++] = R[j++];
 }
-// 0-base indexing
+// 0-based indexing
 void mergeSort(vector<int> &v, int l, int r) {
     if(l == r)return;
     int mid = l + (r - l)/2;

@@ -7,8 +7,9 @@ Practice Problem: https://codeforces.com/contest/126/problem/B
 #include<bits/stdc++.h>
 using namespace std;
 
-// pi[i] = the length of the longest proper prefix of the substring
-// s[0 ... i] which is also a suffix of this substring, TC: O(n)
+// pi[i] = the length of the longest proper prefix of the substring s[0 ... i],
+// which is also a suffix of this substring
+// pi[0] = 0, TC: O(n)
 vector<int> prefix_function(string s) {
   int n = (int)s.length();
   vector<int> pi(n);
@@ -44,7 +45,7 @@ vector<int> z_function(string s) {
 }
 vector<int> count_occ_pfx(vector<int> &pi) {
   int n = pi.size();
-  vector<int> ans(n + 1); // ans[i] = count total i length prefix 
+  vector<int> ans(n + 1); // ans[i] = number of occurrences of prefix of length i
   for (int i = 0; i < n; i++)
     ans[pi[i]]++;
   for (int i = n-1; i > 0; i--)

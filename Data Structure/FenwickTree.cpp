@@ -7,7 +7,7 @@ struct FenwickTree {
   // 0-based array indexing
   vector<ll> bit;
   int n;
-
+  
   FenwickTree(int n) {
     this -> n = n;
     bit.assign(n, 0);

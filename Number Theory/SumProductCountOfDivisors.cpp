@@ -8,7 +8,7 @@ Resource: https://blog.codechef.com/2009/08/17/tutorial-for-problem-product-of-d
 using namespace std;
 const int M = 1e9 + 7;
 #define ll long long
- 
+
 int bigPow(ll base, ll power, const int mod) {
     int ans = 1 % mod;
     base %= mod;

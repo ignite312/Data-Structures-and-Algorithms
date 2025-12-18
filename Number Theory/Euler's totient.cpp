@@ -20,6 +20,8 @@ void sieve() {
         }
     }
 }
+
+// O(sqrt(N))
 ll phi(ll n) {
     ll result = n;
     for (ll p : primes) {
@@ -32,8 +34,8 @@ ll phi(ll n) {
     if (n > 1) result -= result/n;
     return result;
 }
-unordered_map<ll, ll> phi_cache;
 
+unordered_map<ll, ll> phi_cache;
 ll cached_phi(ll n) {
     if (phi_cache.count(n)) return phi_cache[n];
     return phi_cache[n] = phi(n);

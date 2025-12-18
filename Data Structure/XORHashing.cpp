@@ -1,4 +1,10 @@
 // https://codeforces.com/contest/2014/problem/H
+/*
+Explanation:
+We use a randomized hashing technique where each unique element is assigned a random 64-bit integer.
+The hash of a subarray is computed using the XOR of the hashes of its elements.
+This allows us to efficiently check if two subarrays have the same multiset of elements by comparing their hashes.
+*/
 #include <bits/stdc++.h>
 using namespace std;
 #define ll long long

@@ -1,4 +1,12 @@
 // https://codeforces.com/edu/course/2/lesson/2/4/practice/contest/269119/problem/A
+// Finding Patterns: https://cses.fi/problemset/task/2102/ 
+// Counting Patterns: https://cses.fi/problemset/task/2103
+// Pattern Lowest Positions: https://cses.fi/problemset/task/2104/
+// Distinct Substrings: https://cses.fi/problemset/task/2105/
+// kth smallest distinct substrings after lexicographical order: https://cses.fi/problemset/task/2108/
+// kth smallest non distinct substrings after lexicographical order: https://cses.fi/problemset/task/2109/
+// number of distinct substrings of every length 1 to n: https://cses.fi/problemset/task/2110/
+// longest common prefix of suffix starting at i in string b with any suffix in string a: https://codeforces.com/gym/105973/problem/H
 #include <bits/stdc++.h>
 using namespace std;
 

@@ -11,7 +11,7 @@ const int N = 100001;
 vector<int> adj[N];
 int in[N], out[N];
 vector<int> euler_trail;
- 
+
 void dfs(int u) {
     while(!adj[u].empty()) {
         int v = adj[u].back();
@@ -33,7 +33,7 @@ int main() {
             int u, v;
             cin >> u >> v;
             adj[u].push_back(v);
-            out[u]++, in[v]++;        
+            out[u]++, in[v]++;
         }
         /*
         Directed Graphs:

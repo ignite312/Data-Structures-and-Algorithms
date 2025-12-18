@@ -2,6 +2,8 @@
 Problem Name: Tree Matching
 Problem Link: https://cses.fi/problemset/task/1130
 Resource: https://usaco.guide/gold/dp-trees?lang=cpp, https://youtu.be/YbFcHmpM60k?t=3930
+Resource: https://en.wikipedia.org/wiki/Hopcroft–Karp_algorithm
+Resource: https://zobayer.blogspot.com/2010/05/maximum-matching.html
 */
 #include<bits/stdc++.h>
 using namespace std;

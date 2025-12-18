@@ -5,7 +5,6 @@ Resource: https://www.youtube.com/watch?v=mLlaIj_8lv0
 Prac: https://codeforces.com/gym/106208/problem/B
 */
 #include<bits/stdc++.h>
-
 using namespace std;
 #define ll long long
 const int N = 200001;

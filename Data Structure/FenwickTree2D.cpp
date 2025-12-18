@@ -6,7 +6,7 @@ Problem Link: https://cses.fi/problemset/task/1739/
 using namespace std;
 
 struct FenwickTree2D {
-  // 0 based array indexing
+  // 0-based array indexing
   vector<vector<int>> bit;
   int n, m;
   FenwickTree2D(int n, int m) {

@@ -2,7 +2,7 @@
 Problem Name: Path Queries
 Problem Link: https://cses.fi/problemset/task/1138
 Idea: Segment tree + Prefix Sum
-Complexity: 
+Complexity:
 Resource: https://usaco.guide/plat/hld?lang=cpp
 */
 #include<bits/stdc++.h>

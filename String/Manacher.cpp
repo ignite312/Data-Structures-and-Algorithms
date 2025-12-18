@@ -1,6 +1,10 @@
 /*
 Problem Name: Longest Palindrome
 Problem Link: https://cses.fi/problemset/task/1111/
+For string "abcd" modified to -> #a#b#c#d#
+pal[i] = length of the palindrome centered at i in the modified string
+#a#b#c#b#a#z#z#
+121216121212321
 */
 #include<bits/stdc++.h>
 using namespace std;
@@ -22,7 +26,7 @@ vector<int> manacher(string t) {
     return vector<int>(begin(p) + 1, end(p) - 1);
 }
 bool is_palindrome(int l, int r, vector<int> &pal) {
-    // 0-base indexing
+    // 0-based indexing
     l++, r++;
     int range = (r - l) + 1;
     l = (l << 1) - 1;

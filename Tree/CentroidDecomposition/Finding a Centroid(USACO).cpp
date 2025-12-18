@@ -1,8 +1,7 @@
 /*
 Problem Name: Finding a Centroid
+Centroid means a node which when removed splits the tree into components of size at most n/2.
 Problem Link: https://cses.fi/problemset/task/2079
-Idea: 
-Complexity: 
 Resource: https://usaco.guide/plat/centroid?lang=cpp
 */
 #include<bits/stdc++.h>

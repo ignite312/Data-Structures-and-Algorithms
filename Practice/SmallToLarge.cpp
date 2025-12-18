@@ -1,11 +1,11 @@
-// https://codeforces.com/contest/600/submission/227278225
-// https://codeforces.com/blog/entry/44351
+// https://codeforces.com/contest/600/problem/E
 #include<bits/stdc++.h>
 using namespace std;
 #define ll long long
 const int N = 100001;
 int color[N], subtree[N], cnt[N];
-ll t_ans[N], ans[N];
+ll t_ans[N]; // t_ans[i] = sum of colors which have frequency i
+ll ans[N];
 vector<int> adj[N], a[N];
 
 void dfs(int u, int p) {
@@ -23,7 +23,7 @@ void update(int &mx_cnt, int u, int x) {
   mx_cnt = max(mx_cnt, cnt[color[u]]);
 }
 int smallToLarge(int u, int p, bool keep) {
-  int mx_cnt = 0, mx_subtree = -1, bigchild = -1;
+  int mx_cnt = 0, mx_subtree = -1, bigchild = -1; // to track the maximum frequency of any color in the current subtree
   for(auto v : adj[u]) {
     if(v == p)continue;
     if(subtree[v] > mx_subtree) {

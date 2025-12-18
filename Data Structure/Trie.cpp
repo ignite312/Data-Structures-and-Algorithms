@@ -11,7 +11,7 @@ struct Trie {
         word_cnt = 0;
         pfx_cnt = 0;
         is_leaf = false;
-        for(int i = 0; i < 26; i++)child[i] = NULL;
+        for(int i = 0; i < 26; i++) child[i] = NULL;
     }
 };
 void addWord(Trie* root, string& word, int idx) {
@@ -87,14 +87,16 @@ void display(struct Trie* root, string word) {
     if(is_leaf(root))cout << word << "\n";
     for(int i = 0; i < 26; i++)if(root->child[i])display(root->child[i], word + (char)(i + 'a'));
 }*/
+
 /*
+// https://lightoj.com/problem/consistency-checker
 void isWordPfxOfOther(struct Trie* root, bool &ok) {
     for(int i = 0; i < 10; i++)if(root->child[i]) {
         if(root->child[i]->word_cnt && root->child[i]->pfx_cnt > 1) {
             ok = false;
             return;
         }
-        isWordPfxOfOther(root->child[i]);
+        isWordPfxOfOther(root->child[i], ok);
     }
 }
 */

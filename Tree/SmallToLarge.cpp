@@ -2,6 +2,9 @@
 Problem Name: Distinct Colors
 Problem Link: https://cses.fi/problemset/task/1139
 Complexity: NLog(N)
+// https://codeforces.com/contest/600/problem/E
+// https://codeforces.com/problemset/problem/375/D
+// https://codeforces.com/blog/entry/44351
 */
 #include<bits/stdc++.h>
 using namespace std;

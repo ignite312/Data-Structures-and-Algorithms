@@ -1,7 +1,9 @@
 // https://codeforces.com/gym/105973/problem/H
 #include <bits/stdc++.h>
 using namespace std;
-
+// up[i] = index of the nearest suffix before i which is from string a
+// down[i] = index of the nearest suffix after i which is from string a
+// dp[i] = length of the longest common prefix of suffix starting at i in string b with any suffix in string a
 struct SuffixArray {
   string s;
   vector<int> sa, lcp;

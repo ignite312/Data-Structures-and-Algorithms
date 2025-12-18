@@ -12,13 +12,12 @@ int parent[N], en, st;
 void dfs(int u, int p) {
     vis[u] = true;
     for (auto v : adj[u]) {
-        if (p == v)
+        if (v == p)
             continue;
         if (!vis[v]) {
             parent[v] = u;
             dfs(v, u);
-        }
-        else {
+        } else {
             if (!cycle_found)
                 en = u, st = v;
             cycle_found = true;

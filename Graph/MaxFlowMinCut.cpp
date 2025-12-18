@@ -9,7 +9,7 @@ using namespace std;
 const int N = 501;
 vector<int> adj[N];
 int capacity[N][N];
- 
+
 int bfs(int s, int d, int n, vector<int> &parent) {
     parent.assign(n+1, -1);
     parent[s] = 0;

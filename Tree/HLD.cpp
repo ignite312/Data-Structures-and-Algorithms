@@ -1,9 +1,11 @@
 /*
 Problem Name: Path Queries II
 Problem Link: https://cses.fi/problemset/task/2134
+Youtube: https://www.youtube.com/watch?v=_G_LMuLWMaI
 Idea: Heavy Light Decomposition
 Complexity: O(Nlog^2N)
-Resource:
+head[u] = head of the chain in which u lies
+id[u] = position of u in the segment tree
 */
 #include<bits/stdc++.h>
 using namespace std;
@@ -13,53 +15,7 @@ int heavy[N], head[N], id[N];
 vector<int> adj[N];
  
 struct Segtree {
-  // 0-based array indexing
-  int n;
-  vector<int> tree;
-  Segtree(int n) {
-    this->n = n;
-    tree.assign(4 * n, 0);
-  }
-  void build(vector<int> &a, int idx, int l, int r) {
-    if (l == r) {
-      tree[idx] = a[l];
-      return;
-    }
-    int mid = (l + r) / 2;
-    build(a, idx * 2, l, mid);
-    build(a, idx * 2 + 1, mid + 1, r);
-    tree[idx] = max(tree[idx * 2], tree[idx * 2 + 1]);
-  }
-  void build(vector<int> &a) {
-    build(a, 1, 0, n - 1);
-  }
-  void update(int idx, int l, int r, int pos, int val) {
-    if (l == r) {
-      tree[idx] = val;
-      return;
-    }
-    int mid = (l + r) / 2;
-    if (pos <= mid) update(idx * 2, l, mid, pos, val);
-    else update(idx * 2 + 1, mid + 1, r, pos, val);
-    tree[idx] = max(tree[idx * 2], tree[idx * 2 + 1]);
-  }
-  void update(int pos, int val) {
-    update(1, 0, n - 1, pos, val);
-  }
-  int query(int idx, int l, int r, int ql, int qr) {
-    if (l > qr || r < ql) return INT_MIN;
-    if (ql <= l && r <= qr) return tree[idx];
-    int mid = (l + r) / 2;
-    return max(query(idx * 2, l, mid, ql, qr),
-           query(idx * 2 + 1, mid + 1, r, ql, qr));
-  }
-  int query(int l, int r) {
-    return query(1, 0, n - 1, l, r);
-  }
-};
-/*
-struct Segtree {
-    0-based array indexing
+    // 0-based array indexing
     int n;
     vector<int> t;
     Segtree(int n = 0) : n(n), t(4*n, 0) {}
@@ -82,7 +38,6 @@ struct Segtree {
         return res;
     }
 };
-*/
 void dfs(int u, int p) {
   subtree[u] = 1;
   int mx = 0;
