@@ -1,4 +1,5 @@
 #include <iostream>
+
 using namespace std;
 
 class Node {
@@ -49,19 +50,11 @@ class LinkedList {
     return false;
   }
 
-  // Delete a node by value
+  // Delete first occurrence of a value
   void deleteNode(int key) {
-    if (!head) return;
-
-    if (head -> data == key) {
-      Node * temp = head;
-      head = head -> next;
-      delete temp;
-      return;
-    }
-
     Node * current = head;
     Node * prev = nullptr;
+
     while (current && current -> data != key) {
       prev = current;
       current = current -> next;
@@ -69,7 +62,11 @@ class LinkedList {
 
     if (!current) return;
 
-    prev -> next = current -> next;
+    if (current == head) {
+      head = current -> next;
+    } else {
+      prev -> next = current -> next;
+    }
     delete current;
   }
 
