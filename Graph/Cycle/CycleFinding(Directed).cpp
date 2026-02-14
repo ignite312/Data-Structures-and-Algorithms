@@ -6,40 +6,39 @@ Problem Link: https://cses.fi/problemset/task/1678/
 using namespace std;
 const int N = 100001;
 vector<int> adj[N], parent(N);
-vector<int> color(N);
+vector<bool> visited(N), inStack(N);
 int st, en;
- 
-bool dfs(int u) {
-    color[u] = 1;
+
+bool dfs(int u, vector<int> &path, vector<int> &cyc) {
+    visited[u] = inStack[u] = true;
+    path.push_back(u);
     for(auto v : adj[u]) {
-        if(!color[v]) {
-            parent[v] = u;
-            if(dfs(v)) return true;
-        }else if(color[v] == 1) {
-            st = v, en = u;
-            return true;
+        if(!visited[v]) {
+            if(dfs(v, path, cyc)) return true;
+        }else if(inStack[v]) {
+          auto it = find(path.begin(), path.end(), v);
+          cyc.assign(it, path.end());
+          cyc.push_back(v);
+          return true;
         }
     }
-    color[u] = 2;
+    inStack[u] = false;
+    path.pop_back();
     return false;
 }
 void checkCycle(int n) {
-    st = en = -1;
+    vector<int> path, cyc;
     for(int i = 1; i <= n; i++) {
-        if(!color[i] && dfs(i)) {
+        if(!visited[i] && dfs(i, path, cyc)) {
             break;
         }
     }
-    if(st == -1) cout << "IMPOSSIBLE\n";
+    if(cyc.empty()) cout << "IMPOSSIBLE\n";
     else {
-        vector<int> path;
-        path.push_back(st);
-        for(int i = en; i != st; i = parent[i])path.push_back(i);
-        path.push_back(st);
-        reverse(path.begin(), path.end());
-        cout << path.size() << "\n";
-        for(auto i : path)cout << i << " ";
-        cout << "\n";
+      cout << cyc.size() << "\n";
+      for(auto x : cyc) {
+        cout << x << " ";
+      }
     }
 }
 int main(){
