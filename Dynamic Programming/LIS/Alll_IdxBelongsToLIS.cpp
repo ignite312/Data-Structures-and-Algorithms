@@ -41,8 +41,8 @@ int main() {
         for(int i = 0; i < n; i++) {
             cin >> v[i];
         }
-        vector<int> _lis = lis(n, v);
-        vector<int> _lds = lds(n, v);
+        vector<int> _lis = lis(n, v); // length of longest increasing subsequence that ends at index i
+        vector<int> _lds = lds(n, v); // length of longest decreasing subsequence that starts at index i
         vector<int> ans;
         for(int i = 0; i < n; i++) {
           if(_lds[i] + _lis[i] - 1 == mx) {

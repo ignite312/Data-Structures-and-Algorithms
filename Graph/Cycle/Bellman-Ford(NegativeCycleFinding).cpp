@@ -6,7 +6,7 @@ Problem Link: https://cses.fi/problemset/task/1197/
 using namespace std;
 #define ll long long
 vector<tuple<int, int, ll>> edges;
- 
+
 void BellmanFord(int s, int n) {
     vector<ll> dist(n+1, 0);// No need to init INF here because there can be a negative cycle where you can't reach from node 1
                         // and the Graph is not necessarily connected

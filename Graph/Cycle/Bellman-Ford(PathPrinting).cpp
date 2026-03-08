@@ -14,7 +14,7 @@ void BellmanFord(int st, int n) {
         bool any = false;
         for (auto[u, v, cost] : edges)
             if (dist[u] < INF)
-                if (dist[v] > dist[u] + cost) {
+                if (dist[u] + cost < dist[v]) {
                     dist[v] = dist[u] + cost;
                     parent[v] = u;
                     any = true;

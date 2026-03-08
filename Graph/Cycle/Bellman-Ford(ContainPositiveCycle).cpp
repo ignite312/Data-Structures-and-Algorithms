@@ -11,7 +11,7 @@ vector<tuple<int, int, ll>> edges;
 bool mark[N], vis[N];
 vector<int> adj[N];
 vector<ll> d(N, -INF);
- 
+
 void BellmanFord(int s, int n) {
     d[s] = 0;
     for(int i = 0; i < n-1; i++) {
@@ -53,18 +53,22 @@ int main() {
             edges.emplace_back(u, v, wt);
         }
         BellmanFord(1, n);
-        for(int i = 1; i <= n; i++) {
-            if(mark[i]) {
-                for(int i = 0; i <= n; i++)vis[i] = false;
-                // Run a dfs from the node that are responsible for positive cycle
-                // If we can reach node n from this that will make arbitrarily large score
-                dfs(i); 
-                if(vis[n]) {
-                    cout << "-1";
-                    return 0;
-                }
-            }
+        if(mark[n]) {
+            cout << "-1\n";
+            return 0;
         }
+        // for(int i = 1; i <= n; i++) {
+        //     if(mark[i]) {
+        //         for(int i = 0; i <= n; i++)vis[i] = false;
+        //         // Run a dfs from the node that are responsible for positive cycle
+        //         // If we can reach node n from this that will make arbitrarily large score
+        //         dfs(i); 
+        //         if(vis[n]) {
+        //             cout << "-1";
+        //             return 0;
+        //         }
+        //     }
+        // }
         cout << d[n] << "\n";
     }
     return 0;
