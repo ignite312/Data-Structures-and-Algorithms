@@ -7,7 +7,7 @@ Complexity: O(N^3 + Q)
 */
 #include<bits/stdc++.h>
 using namespace std;
-#define ll long long 
+#define ll long long
 const int N = 501;
 const ll INF = LLONG_MAX;
 ll d[N][N];
@@ -26,7 +26,7 @@ void floydWarshall() {
             for (int j = 0; j < n; ++j) {
                 if (d[i][k] < INF && d[k][j] < INF) {
                     d[i][j] = min(d[i][j], d[i][k] + d[k][j]);
-                } 
+                }
             }
         }
     }

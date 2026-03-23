@@ -3,15 +3,17 @@
 using namespace std;
 
 struct Node {
-  public: 
+  public:
   int data;
   Node * next;
 
   Node(int value): data(value), next(nullptr) {}
 };
 class LinkedList {
-  private: Node * head;
-  public: LinkedList(): head(nullptr) {}
+  private: 
+  Node * head;
+  public: 
+  LinkedList(): head(nullptr) {}
 
   // Insert at the front
   void insertFront(int value) {

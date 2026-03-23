@@ -3,7 +3,8 @@
 using namespace std;
 
 class MaxHeap {
-  private: vector < int > heap;
+  private:
+  vector < int > heap;
 
   // Heapify Down (used in delete or build)
   void heapifyDown(int idx, int n) {
@@ -34,7 +35,8 @@ class MaxHeap {
     }
   }
 
-  public: MaxHeap() {}
+  public: 
+  MaxHeap() {}
 
   // Construct heap from array
   MaxHeap(vector < int > & arr) {
@@ -69,7 +71,7 @@ class MaxHeap {
   // Build max heap from current heap array (bottom-up)
   void buildMaxHeap() {
     int n = heap.size();
-    for (int i = n / 2 - 1; i >= 0; i--) { // from last leaf node
+    for (int i = n / 2 - 1; i >= 0; i--) { // from last non-leaf to root
       heapifyDown(i, n);
     }
   }

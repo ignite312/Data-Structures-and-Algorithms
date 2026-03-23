@@ -41,10 +41,7 @@ int primMST(int V, vector < vector < pair < int, int >>> & adj) {
   vector < bool > inMST(V, false);
 
   int mstWeight = 0;
-  pq.push({
-    0,
-    0
-  }); // {weight, node}
+  pq.push({0, 0}); // {weight, node}
 
   while (!pq.empty()) {
     auto[wt, u] = pq.top();

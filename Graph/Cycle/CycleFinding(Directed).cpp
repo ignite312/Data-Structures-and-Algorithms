@@ -26,6 +26,8 @@ bool dfs(int u, vector<int> &path, vector<int> &cyc) {
     path.pop_back();
     return false;
 }
+// 1 → 2 → 3 → 1
+// 2 → 4 → 2
 void checkCycle(int n) {
     vector<int> path, cyc;
     for(int i = 1; i <= n; i++) {
