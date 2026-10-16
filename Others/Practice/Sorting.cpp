@@ -30,28 +30,19 @@ void selectionSort(int arr[], int n) {
     }
 }
 // 0-base indexing
-void merge(int arr[], int l, int r, int mid) {
-    int l_sz = mid - l + 1;
-    int r_sz = r - (mid + 1) + 1;
-    int L[l_sz], R[r_sz];
-    for(int i = 0; i < l_sz; i++)L[i] = arr[i+l];
-    for(int i = 0; i < r_sz; i++)R[i] = arr[i+mid+1];
-    int l_i = 0, r_i = 0;
-    for(int i = l; i <= r; i++) {
-        if(r_i == r_sz) {
-            arr[i] = L[l_i];
-            l_i++;
-        }else if(l_i == l_sz) {
-            arr[i] = R[r_i];
-            r_i++;
-        }else if(L[l_i] <= R[r_i]) {
-            arr[i] = L[l_i];
-            l_i++;
-        }else {
-            arr[i] = R[r_i];
-            r_i++;
+void merge(vector<int> &v, int l, int r, int mid) {
+    vector<int> L(v.begin() + l, v.begin() + mid + 1);
+    vector<int> R(v.begin() + mid + 1, v.begin() + r + 1);
+    int i = 0, j = 0, k = l;
+    while(i < L.size() && j < R.size()) {
+        if(L[i] <= R[j]) {
+            v[k++] = L[i++];
+        } else {
+            v[k++] = R[j++];
         }
     }
+    while(i < L.size()) v[k++] = L[i++];
+    while(j < R.size()) v[k++] = R[j++];
 }
 void mergeSort(int arr[], int l, int r) {
     if(l == r)return;
